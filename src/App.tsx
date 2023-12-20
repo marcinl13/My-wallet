@@ -1,8 +1,8 @@
 import { TimeRange } from '@const/TimeRanges';
 import { ExpenseType } from '@const/Variants';
 import BalanceSummary from '@features/BalanceSummary';
+import GroupedExpensesSummary from '@features/GroupedExpensesSummary';
 import { useExpenses } from '@hooks/useExpenses';
-import GroupedExpensesSummary from './features/GroupedExpensesSummary';
 
 export default function App() {
   const expenses = useExpenses(TimeRange.CurrentMonth);
