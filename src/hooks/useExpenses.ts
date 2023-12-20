@@ -3,9 +3,10 @@ import { useLiveQuery } from "dexie-react-hooks";
 
 import { useStorageContext } from "@/Provider";
 
+import { Expense } from "@const/Expense";
 import { TimeRange } from "@const/TimeRanges";
 
-export function useExpenses(timeRange: TimeRange) {
+export function useExpenses(timeRange: TimeRange): Expense[] {
     const { db } = useStorageContext();
 
     const expensesWithingTimeRange = useLiveQuery(() => {
@@ -13,7 +14,7 @@ export function useExpenses(timeRange: TimeRange) {
         const endOfRange = dayjs().endOf(timeRange).toDate();
 
         return db.expenses.where("createdAt").between(startOfRange, endOfRange, true, true).toArray();
-    }, [timeRange]);
+    }, [timeRange]) || [];
 
-    return expensesWithingTimeRange;
+    return expensesWithingTimeRange as Expense[];
 }
