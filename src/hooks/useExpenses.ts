@@ -1,0 +1,19 @@
+import dayjs from "dayjs";
+import { useLiveQuery } from "dexie-react-hooks";
+
+import { useStorageContext } from "@/Provider";
+
+import { TimeRange } from "@const/TimeRanges";
+
+export function useExpenses(timeRange: TimeRange) {
+    const { db } = useStorageContext();
+
+    const expensesWithingTimeRange = useLiveQuery(() => {
+        const startOfRange = dayjs().startOf(timeRange).toDate();
+        const endOfRange = dayjs().endOf(timeRange).toDate();
+
+        return db.expenses.where("createdAt").between(startOfRange, endOfRange, true, true).toArray();
+    }, [timeRange]);
+
+    return expensesWithingTimeRange;
+}
