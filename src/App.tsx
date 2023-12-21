@@ -1,13 +1,14 @@
-import BalanceSummary from '@features/BalanceSummary';
-import GroupedExpensesSummary from '@features/GroupedExpensesSummary';
-import RecentlyCreatedList from '@features/RecentlyCreatedList';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+
+import Home from '@pages/Home';
 
 export default function App() {
   return (
-    <>
-      <BalanceSummary />
-      <GroupedExpensesSummary />
-      <RecentlyCreatedList />
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="*" element={<Navigate to="/" />} />
+        <Route path="/" element={<Home />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
