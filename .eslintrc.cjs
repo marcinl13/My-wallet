@@ -15,7 +15,7 @@ module.exports = {
           // Side effect imports.
           ['^\\u0000'],
           // Internal packages.
-          ['^(@/.*|$)'],
+          ['^(@/.*|$)', '^(@const.*|$)', '^(@hooks.*|$)'],
           // Parent imports. Put `..` last.
           ['^\\.\\.(?!/?$)', '^\\.\\./?$'],
           // Other relative imports. Put same-folder imports and `.` last.

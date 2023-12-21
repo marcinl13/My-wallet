@@ -11,10 +11,11 @@ import {
   IoMdMedkit
 } from 'react-icons/io';
 
-import { TimeRangeSelect } from '@components/TimeRangeSelect';
 import { ExpenseGroup } from '@const/Groups';
 import { TimeRange } from '@const/TimeRanges';
 import { useExpenses } from '@hooks/useExpenses';
+
+import { TimeRangeSelect } from '@components/TimeRangeSelect';
 
 export default function GroupedExpensesSummary() {
   const [selectedTimeRange, setSelectedRange] = useState(TimeRange.CurrentMonth);

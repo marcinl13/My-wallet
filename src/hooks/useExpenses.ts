@@ -2,7 +2,6 @@ import dayjs from "dayjs";
 import { useLiveQuery } from "dexie-react-hooks";
 
 import { useStorageContext } from "@/Provider";
-
 import { Expense } from "@const/Expense";
 import { TimeRange } from "@const/TimeRanges";
 

@@ -1,10 +1,11 @@
 import { useState } from 'react';
 
-import { TimeRangeSelect } from '@components/TimeRangeSelect';
 import { Expense } from '@const/Expense';
 import { TimeRange } from '@const/TimeRanges';
 import { ExpenseType } from '@const/Variants';
 import { useExpenses } from '@hooks/useExpenses';
+
+import { TimeRangeSelect } from '@components/TimeRangeSelect';
 
 export default function BalanceSummary() {
   const [selectedTimeRange, setSelectedRange] = useState(TimeRange.CurrentMonth);

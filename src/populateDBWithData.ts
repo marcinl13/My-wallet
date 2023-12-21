@@ -1,5 +1,4 @@
-import { DexieDB } from "./main";
-
+import { DexieDB } from "@/main";
 import { Category } from "@const/Categories";
 import { Expense } from "@const/Expense";
 import { ExpenseGroup } from "@const/Groups";

@@ -2,11 +2,12 @@ import { useState } from 'react';
 import { IoIosTrendingDown, IoIosTrendingUp } from 'react-icons/io';
 import { twMerge } from 'tailwind-merge';
 
-import { TimeRangeSelect } from '@components/TimeRangeSelect';
 import { Expense } from '@const/Expense';
 import { TimeRange } from '@const/TimeRanges';
 import { ExpenseType } from '@const/Variants';
 import { useExpenses } from '@hooks/useExpenses';
+
+import { TimeRangeSelect } from '@components/TimeRangeSelect';
 
 enum TabOption {
   All = 'All',
