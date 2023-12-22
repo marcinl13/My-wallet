@@ -70,19 +70,19 @@ function ExpensesList({ expenses }: { expenses: Expense[] }) {
 }
 
 function ExpensesListItem({ expense }: { expense: Expense }) {
-  const isIncome: boolean = expense.type === ExpenseType.Earning;
+  const isIncomeType: boolean = expense.type === ExpenseType.Earning;
   const createdTimeAgo = useRelativeTimeFormat(expense.createdAt);
 
   return (
     <Link
-      to={isIncome ? `edit/earning/${expense.id}` : `edit/expense/${expense.id}`}
+      to={isIncomeType ? `edit/earning/${expense.id}` : `edit/expense/${expense.id}`}
       className={twMerge(
         'flex items-center gap-4 p-1.5',
-        isIncome ? 'text-emerald hover:text-emerald' : 'text-crayola hover:text-crayola'
+        isIncomeType ? 'text-emerald hover:text-emerald' : 'text-crayola hover:text-crayola'
       )}>
       <figure className="p-1 bg-white rounded-full">
-        {!isIncome && <IoIosTrendingDown size={30} />}
-        {isIncome && <IoIosTrendingUp size={30} />}
+        {!isIncomeType && <IoIosTrendingDown size={30} />}
+        {isIncomeType && <IoIosTrendingUp size={30} />}
       </figure>
 
       <div className="flex flex-col w-full text-primary">

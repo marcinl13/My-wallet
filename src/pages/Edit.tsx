@@ -10,7 +10,7 @@ import Form from '@features/Form';
 export default function Page() {
   const { id, type } = useParams();
 
-  const isEarning = type === 'earning';
+  const isEarningType = type === 'earning';
 
   if (!id) {
     return <></>;
@@ -18,9 +18,9 @@ export default function Page() {
 
   return (
     <>
-      <h1 className="text-lg font-bold text-center text-white">{isEarning ? 'Edit earning' : 'Edit expense'}</h1>
+      <h1 className="text-lg font-bold text-center text-white">{isEarningType ? 'Edit earning' : 'Edit expense'}</h1>
 
-      <FormWrapper id={+id} isEarningType={isEarning} />
+      <FormWrapper id={+id} isEarningType={isEarningType} />
     </>
   );
 }

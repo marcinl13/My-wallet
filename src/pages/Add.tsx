@@ -28,14 +28,14 @@ export default function Page() {
     db.expenses.add(formData);
   };
 
-  const isEarning = type === 'earning';
+  const isEarningType = type === 'earning';
 
   return (
     <>
-      <h1 className="text-lg font-bold text-center text-white">{isEarning ? 'New earning' : 'New expense'}</h1>
+      <h1 className="text-lg font-bold text-center text-white">{isEarningType ? 'New earning' : 'New expense'}</h1>
 
       <Form
-        initialState={isEarning ? initialStateEarning : initialStateExpense}
+        initialState={isEarningType ? initialStateEarning : initialStateExpense}
         onSubmit={onSubmit}
         onDelete={() => ({})}
       />
