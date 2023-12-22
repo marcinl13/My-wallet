@@ -27,10 +27,10 @@ export default function Page() {
 
   const isEarningType = type === 'earning';
 
-  const onSubmit = (formData: Expense) => {
-    db.expenses.add(formData);
+  const onSubmit = async (formData: Expense) => {
+    const id = await db.expenses.add(formData);
 
-    alert(`${isEarningType ? ExpenseType.Earning : ExpenseType.Expense}(${formData.id}) successfully added.`);
+    alert(`${isEarningType ? ExpenseType.Earning : ExpenseType.Expense}(${id}) successfully added.`);
 
     navigate(-1);
   };
