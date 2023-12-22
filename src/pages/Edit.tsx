@@ -2,10 +2,10 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import { useStorageContext } from '@/Provider';
 import { Expense, ExpenseId } from '@const/Expense';
+import { ExpenseType } from '@const/Variants';
 import { useExpense } from '@hooks/useExpense';
 
 import Form from '@features/Form';
-import { ExpenseType } from '@/const/Variants';
 
 export default function Page() {
   const { id, type } = useParams();
