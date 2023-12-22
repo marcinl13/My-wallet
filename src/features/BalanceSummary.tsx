@@ -12,7 +12,7 @@ export default function BalanceSummary() {
   const expensesWithingTimeRange = useExpenses(selectedTimeRange);
 
   return (
-    <section className="col-span-2 flex flex-col gap-6 p-3 bg-sunglow rounded-md shadow-md">
+    <section className="flex flex-col col-span-2 gap-6 p-3 rounded-md shadow-md bg-sunglow">
       <div className="flex justify-between">
         <h2 className="font-bold text-primary">Expenses / Incomes</h2>
         <TimeRangeSelect value={selectedTimeRange} onChange={(timeRange) => setSelectedRange(timeRange)} />
@@ -37,7 +37,7 @@ function Summary({ expensesWithingTimeRange }: { expensesWithingTimeRange: Expen
   const balance: number = income - expense;
 
   return (
-    <ul className="grid grid-cols-3 font-medium bg-primary text-white h-24">
+    <ul className="grid h-24 grid-cols-3 font-medium text-white bg-primary">
       <li
         className="flex items-center justify-start gap-2 p-2 bg-emerald"
         style={{
