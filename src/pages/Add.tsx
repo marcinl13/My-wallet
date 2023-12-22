@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import { useStorageContext } from '@/Provider';
 import { categoryDictionary } from '@const/categoryDictionary';
@@ -10,6 +10,7 @@ import Form from '@features/Form';
 
 export default function Page() {
   const { type } = useParams();
+  const navigate = useNavigate();
   const { db } = useStorageContext();
 
   const initialStateEarning: Partial<Expense> = {
@@ -24,11 +25,15 @@ export default function Page() {
     category: categoryDictionary[ExpenseGroup.Home][0]
   };
 
+  const isEarningType = type === 'earning';
+
   const onSubmit = (formData: Expense) => {
     db.expenses.add(formData);
-  };
 
-  const isEarningType = type === 'earning';
+    alert(`${isEarningType ? ExpenseType.Earning : ExpenseType.Expense}(${formData.id}) successfully added.`);
+
+    navigate(-1);
+  };
 
   return (
     <>
