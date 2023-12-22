@@ -2,12 +2,15 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import { useStorageContext } from '@/Provider';
 import { Expense, ExpenseId } from '@const/Expense';
+import { ExpenseType } from '@const/Variants';
 import { useExpense } from '@hooks/useExpense';
 
 import Form from '@features/Form';
 
 export default function Page() {
-  const { id } = useParams();
+  const { id, type } = useParams();
+
+  const isEarningType = type === 'earning';
 
   if (!id) {
     return <></>;
@@ -15,14 +18,18 @@ export default function Page() {
 
   return (
     <>
-      <h1 className="text-lg font-bold text-center text-white">Edit Expense</h1>
+      <h1 className="text-lg font-bold text-center text-white">{isEarningType ? 'Edit earning' : 'Edit expense'}</h1>
 
-      <Wrapper id={+id} />
+      <FormWrapper id={+id} isEarningType={isEarningType} />
     </>
   );
 }
 
-function Wrapper({ id }: Pick<Expense, 'id'>) {
+type Props = Pick<Expense, 'id'> & {
+  isEarningType: boolean;
+};
+
+function FormWrapper({ id, isEarningType }: Props) {
   const expense = useExpense(id);
   const { db } = useStorageContext();
   const navigate = useNavigate();
@@ -32,7 +39,8 @@ function Wrapper({ id }: Pick<Expense, 'id'>) {
 
     await db.expenses.update(formData.id, formData);
 
-    alert(`Expense(${formData.id}) successfully updated.`);
+    alert(`${isEarningType ? ExpenseType.Earning : ExpenseType.Expense}(${formData.id}) successfully updated.`);
+
     navigate(-1);
   };
 
@@ -41,7 +49,8 @@ function Wrapper({ id }: Pick<Expense, 'id'>) {
 
     await db.expenses.where('id').equals(id).delete();
 
-    alert(`Expense(${id}) successfully deleted.`);
+    alert(`${isEarningType ? ExpenseType.Earning : ExpenseType.Expense}(${id}) successfully deleted.`);
+
     navigate(-1);
   };
 

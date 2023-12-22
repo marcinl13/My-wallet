@@ -1,9 +1,7 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 
-import AddEarning from '@pages/AddEarning';
-import AddExpense from '@pages/AddExpense';
-import EditEarning from '@pages/EditEarning';
-import EditExpense from '@pages/EditExpense';
+import Add from '@pages/Add';
+import Edit from '@pages/Edit';
 import Home from '@pages/Home';
 
 export default function App() {
@@ -12,10 +10,8 @@ export default function App() {
       <Routes>
         <Route path="*" element={<Navigate to="/" />} />
         <Route path="/" element={<Home />} />
-        <Route path="/add/expense" element={<AddExpense />} />
-        <Route path="/add/earning" element={<AddEarning />} />
-        <Route path="/earning/:id" element={<EditEarning />} />
-        <Route path="/expense/:id" element={<EditExpense />} />
+        <Route path="/add/:type" element={<Add />} />
+        <Route path="/edit/:type/:id" element={<Edit />} />
       </Routes>
     </BrowserRouter>
   );
