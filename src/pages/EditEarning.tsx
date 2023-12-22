@@ -4,7 +4,7 @@ import { useStorageContext } from '@/Provider';
 import { Expense, ExpenseId } from '@const/Expense';
 import { useExpense } from '@hooks/useExpense';
 
-import AddForm from '@features/AddForm';
+import Form from '@features/Form';
 
 export default function Page() {
   const { id } = useParams();
@@ -47,5 +47,5 @@ function Wrapper({ id }: Pick<Expense, 'id'>) {
     navigate(-1);
   };
 
-  return expense && <AddForm initialState={expense} onSubmit={onSubmit} onDelete={onDelete} />;
+  return expense && <Form initialState={expense} onSubmit={onSubmit} onDelete={onDelete} />;
 }
