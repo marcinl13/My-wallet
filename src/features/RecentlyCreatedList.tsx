@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { IoIosTrendingDown, IoIosTrendingUp } from 'react-icons/io';
+import { Link } from 'react-router-dom';
 import { twMerge } from 'tailwind-merge';
 
 import { Expense } from '@const/Expense';
@@ -71,7 +72,8 @@ function ExpensesListItem({ expense }: { expense: Expense }) {
   const isIncome: boolean = expense.type === ExpenseType.Earning;
 
   return (
-    <article
+    <Link
+      to={isIncome ? `earning/${expense.id}` : `expense/${expense.id}`}
       className={twMerge(
         'flex items-center gap-4 p-1.5 odd:bg-slate-400',
         isIncome ? 'text-emerald hover:text-emerald' : 'text-crayola hover:text-crayola'
@@ -98,6 +100,6 @@ function ExpensesListItem({ expense }: { expense: Expense }) {
           currency: 'USD'
         })}
       </div>
-    </article>
+    </Link>
   );
 }
