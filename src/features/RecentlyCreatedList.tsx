@@ -6,8 +6,8 @@ import { twMerge } from 'tailwind-merge';
 import { Expense } from '@const/Expense';
 import { TimeRange } from '@const/TimeRanges';
 import { ExpenseType } from '@const/Variants';
-import { useRelativeTimeFormat } from '@hooks/useRelativeTimeFormat';
 import { useExpenses } from '@hooks/useExpenses';
+import { useRelativeTimeFormat } from '@hooks/useRelativeTimeFormat';
 
 import { TimeRangeSelect } from '@components/TimeRangeSelect';
 
