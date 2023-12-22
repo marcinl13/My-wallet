@@ -19,7 +19,7 @@ enum TabOption {
 
 export default function RecentlyCreatedList() {
   const [activeTab, setActiveTab] = useState<string>(TabOption.All);
-  const [selectedTimeRange, setSelectedRange] = useState(TimeRange.CurrentMonth);
+  const [selectedTimeRange, setSelectedRange] = useState(TimeRange.CurrentDay);
   const expensesWithingTimeRange = useExpenses(selectedTimeRange);
 
   return (
