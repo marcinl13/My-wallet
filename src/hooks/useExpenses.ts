@@ -12,7 +12,7 @@ export function useExpenses(timeRange: TimeRange): Expense[] {
         const startOfRange = dayjs().startOf(timeRange).toDate();
         const endOfRange = dayjs().endOf(timeRange).toDate();
 
-        return db.expenses.where("createdAt").between(startOfRange, endOfRange, true, true).toArray();
+        return db.expenses.where("createdAt").between(startOfRange, endOfRange, true, true).reverse().toArray();
     }, [timeRange]) || [];
 
     return expensesWithingTimeRange as Expense[];
