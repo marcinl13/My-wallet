@@ -75,7 +75,7 @@ function ExpensesListItem({ expense }: { expense: Expense }) {
 
   return (
     <Link
-      to={isIncome ? `earning/${expense.id}` : `expense/${expense.id}`}
+      to={isIncome ? `edit/earning/${expense.id}` : `edit/expense/${expense.id}`}
       className={twMerge(
         'flex items-center gap-4 p-1.5',
         isIncome ? 'text-emerald hover:text-emerald' : 'text-crayola hover:text-crayola'
