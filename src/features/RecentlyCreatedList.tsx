@@ -6,6 +6,7 @@ import { twMerge } from 'tailwind-merge';
 import { Expense } from '@const/Expense';
 import { TimeRange } from '@const/TimeRanges';
 import { ExpenseType } from '@const/Variants';
+import { useRelativeTimeFormat } from '@hooks/useRelativeTimeFormat';
 import { useExpenses } from '@hooks/useExpenses';
 
 import { TimeRangeSelect } from '@components/TimeRangeSelect';
@@ -70,6 +71,7 @@ function ExpensesList({ expenses }: { expenses: Expense[] }) {
 
 function ExpensesListItem({ expense }: { expense: Expense }) {
   const isIncome: boolean = expense.type === ExpenseType.Earning;
+  const createdTimeAgo = useRelativeTimeFormat(expense.createdAt);
 
   return (
     <Link
@@ -88,12 +90,7 @@ function ExpensesListItem({ expense }: { expense: Expense }) {
           {expense.text}
         </p>
 
-        <p className="text-xs">
-          {new Intl.DateTimeFormat('en-us', {
-            dateStyle: 'long',
-            timeStyle: 'short'
-          }).format(expense.createdAt)}
-        </p>
+        <p className="text-xs">{createdTimeAgo}</p>
       </div>
 
       <div className="font-bold">
