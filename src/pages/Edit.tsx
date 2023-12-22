@@ -20,7 +20,7 @@ export default function Page() {
     <>
       <h1 className="text-lg font-bold text-center text-white">{isEarning ? 'Edit earning' : 'Edit expense'}</h1>
 
-      <Wrapper id={+id} isEarningType={isEarning} />
+      <FormWrapper id={+id} isEarningType={isEarning} />
     </>
   );
 }
@@ -29,7 +29,7 @@ type Props = Pick<Expense, 'id'> & {
   isEarningType: boolean;
 };
 
-function Wrapper({ id, isEarningType }: Props) {
+function FormWrapper({ id, isEarningType }: Props) {
   const expense = useExpense(id);
   const { db } = useStorageContext();
   const navigate = useNavigate();
