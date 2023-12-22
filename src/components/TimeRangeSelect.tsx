@@ -20,6 +20,7 @@ export function TimeRangeSelect({ value, onChange }: Props) {
       id={id}
       className="border border-secondary text-primary text-sm rounded-lg focus:ring focus:outline-secondary px-1.5 capitalize text-right"
       value={value}
+      aria-label="time range select"
       onChange={onHandleChange}>
       {Object.values(TimeRange).map((timeRange) => (
         <option key={timeRange} dir="rtl" value={timeRange}>
