@@ -22,14 +22,14 @@ export default function RecentlyCreatedList() {
   const expensesWithingTimeRange = useExpenses(selectedTimeRange);
 
   return (
-    <section className="flex flex-col gap-2 p-3 bg-sunglow rounded-md shadow-md">
+    <section className="flex flex-col gap-2 p-3 rounded-md shadow-md bg-sunglow">
       <div>
         <div className="flex justify-between pb-1 border-b-2 border-primary">
           <h2 className="font-bold text-primary">Recently added</h2>
           <TimeRangeSelect onChange={(timeRange) => setSelectedRange(timeRange)} value={selectedTimeRange} />
         </div>
 
-        <ul className="grid grid-cols-3 gap-1 leading-6 text-center font-semibold text-sm border-b-2 border-primary">
+        <ul className="grid grid-cols-3 gap-1 text-sm font-semibold leading-6 text-center border-b-2 border-primary">
           {Object.keys(TabOption).map((tab) => (
             <li
               key={tab}
@@ -56,11 +56,11 @@ export default function RecentlyCreatedList() {
 
 function ExpensesList({ expenses }: { expenses: Expense[] }) {
   if (!expenses.length) {
-    return <p className="flex items-center justify-center h-40 text-white">Not found</p>;
+    return <p className="flex items-center justify-center h-40 text-lg font-bold md:text-xl text-primary">Not found</p>;
   }
 
   return (
-    <div className="flex flex-col overflow-y-auto max-h-40 pr-2">
+    <div className="flex flex-col h-40 pr-2 overflow-y-auto">
       {expenses.map((expense: Expense) => (
         <ExpensesListItem key={expense.id} expense={expense} />
       ))}
@@ -75,16 +75,18 @@ function ExpensesListItem({ expense }: { expense: Expense }) {
     <Link
       to={isIncome ? `earning/${expense.id}` : `expense/${expense.id}`}
       className={twMerge(
-        'flex items-center gap-4 p-1.5 odd:bg-slate-400',
+        'flex items-center gap-4 p-1.5',
         isIncome ? 'text-emerald hover:text-emerald' : 'text-crayola hover:text-crayola'
       )}>
-      <figure className="rounded-full bg-white p-1">
+      <figure className="p-1 bg-white rounded-full">
         {!isIncome && <IoIosTrendingDown size={30} />}
         {isIncome && <IoIosTrendingUp size={30} />}
       </figure>
 
-      <div className="flex flex-col w-full text-primary text-left">
-        <p className="font-bold">{expense.text}</p>
+      <div className="flex flex-col w-full text-primary">
+        <p className="overflow-x-hidden font-bold text-ellipsis max-w-[40vw] md:max-w-none whitespace-nowrap">
+          {expense.text}
+        </p>
 
         <p className="text-xs">
           {new Intl.DateTimeFormat('en-us', {
