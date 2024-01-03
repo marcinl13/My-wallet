@@ -1,6 +1,6 @@
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { useStorageContext } from '@/Provider';
+import { useStorageContext } from '@context/Storage';
 import { categoryDictionary } from '@const/categoryDictionary';
 import { Expense } from '@const/Expense';
 import { ExpenseGroup } from '@const/Groups';
