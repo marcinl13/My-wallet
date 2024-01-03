@@ -24,6 +24,7 @@
     "paths": {
       "@/*":  ["./src/*"], 
       "@components/*": ["./src/components/*"],
+      "@context/*": ["./src/context/*"],
       "@features/*": ["./src/features/*"],
       "@const/*": ["./src/const/*"],
       "@hooks/*": ["./src/hooks/*"],

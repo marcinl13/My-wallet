@@ -1,6 +1,6 @@
 import { useLiveQuery } from "dexie-react-hooks";
 
-import { useStorageContext } from "@/Provider";
+import { useStorageContext } from "@context/Storage";
 import { Expense, ExpenseId } from "@const/Expense";
 
 export function useExpense(id: ExpenseId): Expense | undefined {

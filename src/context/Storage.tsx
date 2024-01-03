@@ -1,6 +1,6 @@
-import { createContext, ReactNode, useContext } from "react";
+import { createContext, ReactNode, useContext } from 'react';
 
-import { DexieDB } from "./main";
+import { DexieDB } from '../main';
 
 const StorageContext = createContext<{ db: DexieDB } | null>(null);
 
@@ -8,9 +8,8 @@ export const StorageProvider = ({ db, children }: { children: ReactNode; db: Dex
   return (
     <StorageContext.Provider
       value={{
-        db,
-      }}
-    >
+        db
+      }}>
       {children}
     </StorageContext.Provider>
   );
@@ -19,7 +18,7 @@ export const StorageProvider = ({ db, children }: { children: ReactNode; db: Dex
 export const useStorageContext = () => {
   const context = useContext(StorageContext);
 
-  if (!context) throw new Error("StorageContext must be called from within the StorageProvider");
+  if (!context) throw new Error('StorageContext must be called from within the StorageProvider');
 
   return context;
 };

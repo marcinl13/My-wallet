@@ -1,6 +1,6 @@
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { useStorageContext } from '@/Provider';
+import { useStorageContext } from '@context/Storage';
 import { Expense, ExpenseId } from '@const/Expense';
 import { ExpenseType } from '@const/Variants';
 import { useExpense } from '@hooks/useExpense';

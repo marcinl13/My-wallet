@@ -1,11 +1,11 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import Dexie, { Table } from "dexie";
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import Dexie, { Table } from 'dexie';
 
-import App from "@/App.tsx";
-import { StorageProvider } from "@/Provider.tsx";
+import App from '@/App.tsx';
+import { StorageProvider } from '@context/Storage';
 
-import "@/index.css";
+import '@/index.css';
 
 interface Expense {
   id?: number;
@@ -21,16 +21,16 @@ export class DexieDB extends Dexie {
   expenses!: Table<Expense>;
 
   constructor() {
-    super("Expense");
+    super('Expense');
     this.version(1).stores({
-      expenses: "++id, type, amount, text, group, category, createdAt", // Primary key and indexed props
+      expenses: '++id, type, amount, text, group, category, createdAt' // Primary key and indexed props
     });
   }
 }
 
 const db = new DexieDB();
 
-ReactDOM.createRoot(document.getElementById("root")!).render(
+ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <StorageProvider db={db}>
       <App />
