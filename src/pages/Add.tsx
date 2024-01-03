@@ -1,4 +1,5 @@
 import { useNavigate, useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 import { useStorageContext } from '@context/Storage';
 import { categoryDictionary } from '@const/categoryDictionary';
@@ -28,11 +29,15 @@ export default function Page() {
   const isEarningType = type === 'earning';
 
   const onSubmit = async (formData: Expense) => {
-    const id = await db.expenses.add(formData);
+    try {
+      await db.expenses.add(formData);
 
-    alert(`${isEarningType ? ExpenseType.Earning : ExpenseType.Expense}(${id}) successfully added.`);
+      toast.success(`${isEarningType ? ExpenseType.Earning : ExpenseType.Expense} successfully added.`);
 
-    navigate(-1);
+      navigate(-1);
+    } catch (error) {
+      toast.warning((error as Error).message);
+    }
   };
 
   return (

@@ -1,4 +1,5 @@
 import { useNavigate, useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 import { useStorageContext } from '@context/Storage';
 import { Expense, ExpenseId } from '@const/Expense';
@@ -35,23 +36,33 @@ function FormWrapper({ id, isEarningType }: Props) {
   const navigate = useNavigate();
 
   const onSubmit = async (formData: Expense) => {
-    if (!formData.id) return;
+    try {
+      if (!formData.id) return;
 
-    await db.expenses.update(formData.id, formData);
+      await db.expenses.update(formData.id, formData);
 
-    alert(`${isEarningType ? ExpenseType.Earning : ExpenseType.Expense}(${formData.id}) successfully updated.`);
+      toast.success(
+        `${isEarningType ? ExpenseType.Earning : ExpenseType.Expense} successfully updated.`
+      );
 
-    navigate(-1);
+      navigate(-1);
+    } catch (error) {
+      toast.warning((error as Error).message);
+    }
   };
 
   const onDelete = async (id: ExpenseId) => {
-    if (!id) return;
+    try {
+      if (!id) return;
 
-    await db.expenses.where('id').equals(id).delete();
+      await db.expenses.where('id').equals(id).delete();
 
-    alert(`${isEarningType ? ExpenseType.Earning : ExpenseType.Expense}(${id}) successfully deleted.`);
+      toast.success(`${isEarningType ? ExpenseType.Earning : ExpenseType.Expense}(${id}) successfully deleted.`);
 
-    navigate(-1);
+      navigate(-1);
+    } catch (error) {
+      toast.warning((error as Error).message);
+    }
   };
 
   return expense && <Form initialState={expense} onSubmit={onSubmit} onDelete={onDelete} />;
