@@ -4,9 +4,9 @@ import Dexie, { Table } from 'dexie';
 
 import App from '@/App.tsx';
 import { StorageProvider } from '@context/Storage';
+import { ToastNotificationProvider } from '@context/ToastNotification';
 
 import '@/index.css';
-
 interface Expense {
   id?: number;
   type: string;
@@ -32,8 +32,10 @@ const db = new DexieDB();
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <StorageProvider db={db}>
-      <App />
-    </StorageProvider>
+    <ToastNotificationProvider>
+      <StorageProvider db={db}>
+        <App />
+      </StorageProvider>
+    </ToastNotificationProvider>
   </React.StrictMode>
 );
