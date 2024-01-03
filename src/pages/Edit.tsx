@@ -37,13 +37,13 @@ function FormWrapper({ id, isEarningType }: Props) {
 
   const onSubmit = async (formData: Expense) => {
     try {
-      if (!formData.id) return;
+      if (!formData.id) {
+        throw new Error(`Couldn't find the ${isEarningType ? ExpenseType.Earning : ExpenseType.Expense} id.`);
+      }
 
       await db.expenses.update(formData.id, formData);
 
-      toast.success(
-        `${isEarningType ? ExpenseType.Earning : ExpenseType.Expense} successfully updated.`
-      );
+      toast.success(`${isEarningType ? ExpenseType.Earning : ExpenseType.Expense} successfully updated.`);
 
       navigate(-1);
     } catch (error) {
@@ -53,11 +53,13 @@ function FormWrapper({ id, isEarningType }: Props) {
 
   const onDelete = async (id: ExpenseId) => {
     try {
-      if (!id) return;
+      if (!id) {
+        throw new Error(`Couldn't find the ${isEarningType ? ExpenseType.Earning : ExpenseType.Expense} id.`);
+      }
 
       await db.expenses.where('id').equals(id).delete();
 
-      toast.success(`${isEarningType ? ExpenseType.Earning : ExpenseType.Expense}(${id}) successfully deleted.`);
+      toast.success(`${isEarningType ? ExpenseType.Earning : ExpenseType.Expense} successfully deleted.`);
 
       navigate(-1);
     } catch (error) {
