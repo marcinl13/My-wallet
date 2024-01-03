@@ -87,7 +87,7 @@ export default function Form({ initialState, onSubmit, onDelete }: FormProps) {
       </fieldset>
 
       <section className={twMerge('grid gap-3', !!formData?.id && 'grid-cols-1 md:grid-cols-2')}>
-        <FormButton type="submit" variant={ButtonVariant.Save} text="Save" />
+        <FormButton type="submit" variant={ButtonVariant.Save} text={!!formData?.id ? 'Update' : 'Save'} />
 
         {!!formData?.id && (
           <FormButton
