@@ -24,7 +24,7 @@ export default function BalanceSummary() {
 }
 
 function Summary({ expensesWithingTimeRange }: { expensesWithingTimeRange: Transaction[] }) {
-  const income: number =
+  const earning: number =
     expensesWithingTimeRange
       ?.filter((e: Transaction) => e.type === TransactionType.Earning)
       .reduce((n, { amount }) => n + amount, 0) || 0;
@@ -34,7 +34,7 @@ function Summary({ expensesWithingTimeRange }: { expensesWithingTimeRange: Trans
       ?.filter((e: Transaction) => e.type === TransactionType.Expense)
       .reduce((n, { amount }) => n + amount, 0) || 0;
 
-  const balance: number = income - expense;
+  const balance: number = earning - expense;
 
   return (
     <ul className="grid h-24 grid-cols-3 font-medium text-white bg-primary">
@@ -43,7 +43,7 @@ function Summary({ expensesWithingTimeRange }: { expensesWithingTimeRange: Trans
         style={{
           clipPath: 'polygon(0% 0%, 75% 0%, 100% 50%, 75% 100%, 0% 100%)'
         }}>
-        {income.toLocaleString('en-us', {
+        {earning.toLocaleString('en-us', {
           style: 'currency',
           currency: 'USD'
         })}
