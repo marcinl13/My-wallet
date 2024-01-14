@@ -11,7 +11,7 @@ import {
   IoMdMedkit
 } from 'react-icons/io';
 
-import { ExpenseGroup } from '@const/Groups';
+import { TransactionGroup } from '@const/Groups';
 import { TimeRange } from '@const/TimeRanges';
 import { useTransactions } from '@hooks/useTransactions';
 
@@ -29,7 +29,7 @@ export default function GroupedExpensesSummary() {
       </div>
 
       <ul className="grid grid-cols-2 gap-2 text-white">
-        {Object.values(ExpenseGroup).map((group) => (
+        {Object.values(TransactionGroup).map((group) => (
           <GroupExpenseItem
             key={group}
             group={group}
@@ -48,22 +48,22 @@ function GroupExpenseItem({
   amount = 0,
   iconSize = 28
 }: {
-  group: ExpenseGroup;
+  group: TransactionGroup;
   amount: number;
   iconSize?: number;
 }) {
   return (
     <li className="flex items-center justify-between font-semibold text-white bg-primary rounded-lg p-2">
       <figure className="bg-white text-secondary rounded-md">
-        {group === ExpenseGroup.Income && <IoMdCash size={iconSize} />}
-        {group === ExpenseGroup.Home && <IoIosHome size={iconSize} />}
-        {group === ExpenseGroup.Food && <IoIosBasket size={iconSize} />}
-        {group === ExpenseGroup.Transport && <IoMdCar size={iconSize} />}
-        {group === ExpenseGroup.HealthCare && <IoMdMedkit size={iconSize} />}
-        {group === ExpenseGroup.Entertainment && <IoIosTennisball size={iconSize} />}
-        {group === ExpenseGroup.PersonalExpenses && <IoIosSchool size={iconSize} />}
-        {group === ExpenseGroup.Rest && <IoIosBoat size={iconSize} />}
-        {group === ExpenseGroup.Clothes && <IoIosCut size={iconSize} />}
+        {group === TransactionGroup.Other && <IoMdCash size={iconSize} />}
+        {group === TransactionGroup.Home && <IoIosHome size={iconSize} />}
+        {group === TransactionGroup.Food && <IoIosBasket size={iconSize} />}
+        {group === TransactionGroup.Transport && <IoMdCar size={iconSize} />}
+        {group === TransactionGroup.HealthCare && <IoMdMedkit size={iconSize} />}
+        {group === TransactionGroup.Entertainment && <IoIosTennisball size={iconSize} />}
+        {group === TransactionGroup.PersonalExpenses && <IoIosSchool size={iconSize} />}
+        {group === TransactionGroup.Rest && <IoIosBoat size={iconSize} />}
+        {group === TransactionGroup.Clothes && <IoIosCut size={iconSize} />}
       </figure>
 
       {amount.toLocaleString('en-us', {

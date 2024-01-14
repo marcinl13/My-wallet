@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 
 import { useStorageContext } from '@context/Storage';
 import { categoryDictionary } from '@const/categoryDictionary';
-import { ExpenseGroup } from '@const/Groups';
+import { TransactionGroup } from '@const/Groups';
 import { Transaction } from '@const/Transaction';
 import { TransactionType } from '@const/Variants';
 
@@ -16,14 +16,14 @@ export default function Page() {
 
   const initialStateEarning: Partial<Transaction> = {
     type: TransactionType.Earning,
-    group: ExpenseGroup.Income,
-    category: categoryDictionary[ExpenseGroup.Income][0]
+    group: TransactionGroup.Other,
+    category: categoryDictionary[TransactionGroup.Other][0]
   };
 
   const initialStateExpense: Partial<Transaction> = {
     type: TransactionType.Expense,
-    group: ExpenseGroup.Home,
-    category: categoryDictionary[ExpenseGroup.Home][0]
+    group: TransactionGroup.Home,
+    category: categoryDictionary[TransactionGroup.Home][0]
   };
 
   const isEarningType = type === 'earning';

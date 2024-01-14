@@ -1,11 +1,11 @@
 import { InputHTMLAttributes } from 'react';
 
 import { categoryDictionary } from '@const/categoryDictionary';
-import { ExpenseGroup } from '@const/Groups';
+import { TransactionGroup } from '@const/Groups';
 
 interface FormSelectProps extends InputHTMLAttributes<HTMLSelectElement> {
   label: string;
-  group: ExpenseGroup;
+  group: TransactionGroup;
 }
 
 export function FormSelectGroupCategory(props: FormSelectProps) {

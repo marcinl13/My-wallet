@@ -3,7 +3,7 @@ import { twMerge } from 'tailwind-merge';
 
 import { Category } from '@const/Categories';
 import { categoryDictionary } from '@const/categoryDictionary';
-import { ExpenseGroup } from '@const/Groups';
+import { TransactionGroup } from '@const/Groups';
 import { Transaction, TransactionId } from '@const/Transaction';
 import { TransactionType } from '@const/Variants';
 
@@ -16,8 +16,8 @@ const baseState: Transaction = {
   amount: 0,
   text: '',
   type: TransactionType.Expense,
-  group: ExpenseGroup.Home,
-  category: categoryDictionary[ExpenseGroup.Home][0],
+  group: TransactionGroup.Home,
+  category: categoryDictionary[TransactionGroup.Home][0],
   createdAt: new Date()
 };
 
@@ -73,8 +73,8 @@ export default function Form({ initialState, onSubmit, onDelete }: FormProps) {
             value={formData.group}
             onChange={(e) =>
               setFormData({
-                group: e.target.value as ExpenseGroup,
-                category: categoryDictionary[e.target.value as ExpenseGroup][0]
+                group: e.target.value as TransactionGroup,
+                category: categoryDictionary[e.target.value as TransactionGroup][0]
               })
             }
           />
@@ -82,7 +82,7 @@ export default function Form({ initialState, onSubmit, onDelete }: FormProps) {
           <FormSelectGroupCategory
             required
             label="Category"
-            group={formData.group as ExpenseGroup}
+            group={formData.group as TransactionGroup}
             value={formData.category}
             onChange={(e) => setFormData({ category: e.target.value as Category })}
           />

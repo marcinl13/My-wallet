@@ -1,5 +1,5 @@
 import { Category } from "./Categories";
-import { ExpenseGroup } from "./Groups";
+import { TransactionGroup } from "./Groups";
 import { TransactionType } from "./Variants";
 
 export type Transaction = {
@@ -7,7 +7,7 @@ export type Transaction = {
     amount: number;
     text: string;
     type: `${TransactionType}`;
-    group: `${ExpenseGroup}`;
+    group: `${TransactionGroup}`;
     category: Category;
     createdAt: Date;
 };

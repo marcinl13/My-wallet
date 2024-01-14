@@ -1,4 +1,4 @@
-export enum ExpenseGroup {
+export enum TransactionGroup {
     Home = "Home",
     Food = "Food",
     Transport = "Transport",
@@ -7,5 +7,5 @@ export enum ExpenseGroup {
     Entertainment = "Entertainment",
     Rest = "Rest",
     Clothes = "Clothes",
-    Income = "Income"
+    Other = "Other"
 }
