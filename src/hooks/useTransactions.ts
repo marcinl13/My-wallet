@@ -13,5 +13,5 @@ export function useTransactions(timeRange: TimeRange): Transaction[] | undefined
         const endOfRange = dayjs().endOf(timeRange).toDate();
 
         return db.transactions.where("createdAt").between(startOfRange, endOfRange, true, true).reverse().toArray();
-    }, [timeRange]) as Transaction[] | undefined;
+    }, [timeRange]);
 }
