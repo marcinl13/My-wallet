@@ -32,7 +32,7 @@ type Props = Pick<Transaction, 'id'> & {
 
 function FormWrapper({ id, isEarningType }: Props) {
   const expense = useTransaction(id);
-  const { db } = useStorageContext();
+  const { updateTransaction, deleteTransaction } = useStorageContext();
   const navigate = useNavigate();
 
   const onSubmit = async (formData: Transaction) => {
@@ -41,7 +41,7 @@ function FormWrapper({ id, isEarningType }: Props) {
         throw new Error(`Couldn't find the ${isEarningType ? TransactionType.Earning : TransactionType.Expense} id.`);
       }
 
-      await db.transactions.update(formData.id, formData);
+      await updateTransaction(formData.id, formData);
 
       toast.success(`${isEarningType ? TransactionType.Earning : TransactionType.Expense} successfully updated.`);
 
@@ -57,7 +57,7 @@ function FormWrapper({ id, isEarningType }: Props) {
         throw new Error(`Couldn't find the ${isEarningType ? TransactionType.Earning : TransactionType.Expense} id.`);
       }
 
-      await db.transactions.where('id').equals(id).delete();
+      await deleteTransaction(id);
 
       toast.success(`${isEarningType ? TransactionType.Earning : TransactionType.Expense} successfully deleted.`);
 
