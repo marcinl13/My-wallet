@@ -5,7 +5,7 @@ import { twMerge } from 'tailwind-merge';
 
 import { Expense } from '@const/Expense';
 import { TimeRange } from '@const/TimeRanges';
-import { ExpenseType } from '@const/Variants';
+import { TransactionType } from '@const/Variants';
 import { useExpenses } from '@hooks/useExpenses';
 import { useRelativeTimeFormat } from '@hooks/useRelativeTimeFormat';
 
@@ -43,11 +43,11 @@ export default function RecentlyCreatedList() {
       </div>
 
       {activeTab === TabOption.Earning && (
-        <ExpensesList expenses={expensesWithingTimeRange.filter((ex) => ex.type === ExpenseType.Earning)} />
+        <ExpensesList expenses={expensesWithingTimeRange.filter((ex) => ex.type === TransactionType.Earning)} />
       )}
 
       {activeTab === TabOption.Expenses && (
-        <ExpensesList expenses={expensesWithingTimeRange.filter((ex) => ex.type === ExpenseType.Expense)} />
+        <ExpensesList expenses={expensesWithingTimeRange.filter((ex) => ex.type === TransactionType.Expense)} />
       )}
 
       {activeTab === TabOption.All && <ExpensesList expenses={expensesWithingTimeRange} />}
@@ -70,7 +70,7 @@ function ExpensesList({ expenses }: { expenses: Expense[] }) {
 }
 
 function ExpensesListItem({ expense }: { expense: Expense }) {
-  const isIncomeType: boolean = expense.type === ExpenseType.Earning;
+  const isIncomeType: boolean = expense.type === TransactionType.Earning;
   const createdTimeAgo = useRelativeTimeFormat(expense.createdAt);
 
   return (

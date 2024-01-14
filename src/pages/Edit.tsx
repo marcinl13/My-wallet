@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 
 import { useStorageContext } from '@context/Storage';
 import { Expense, ExpenseId } from '@const/Expense';
-import { ExpenseType } from '@const/Variants';
+import { TransactionType } from '@const/Variants';
 import { useExpense } from '@hooks/useExpense';
 
 import Form from '@features/Form';
@@ -38,12 +38,12 @@ function FormWrapper({ id, isEarningType }: Props) {
   const onSubmit = async (formData: Expense) => {
     try {
       if (!formData.id) {
-        throw new Error(`Couldn't find the ${isEarningType ? ExpenseType.Earning : ExpenseType.Expense} id.`);
+        throw new Error(`Couldn't find the ${isEarningType ? TransactionType.Earning : TransactionType.Expense} id.`);
       }
 
       await db.expenses.update(formData.id, formData);
 
-      toast.success(`${isEarningType ? ExpenseType.Earning : ExpenseType.Expense} successfully updated.`);
+      toast.success(`${isEarningType ? TransactionType.Earning : TransactionType.Expense} successfully updated.`);
 
       navigate(-1);
     } catch (error) {
@@ -54,12 +54,12 @@ function FormWrapper({ id, isEarningType }: Props) {
   const onDelete = async (id: ExpenseId) => {
     try {
       if (!id) {
-        throw new Error(`Couldn't find the ${isEarningType ? ExpenseType.Earning : ExpenseType.Expense} id.`);
+        throw new Error(`Couldn't find the ${isEarningType ? TransactionType.Earning : TransactionType.Expense} id.`);
       }
 
       await db.expenses.where('id').equals(id).delete();
 
-      toast.success(`${isEarningType ? ExpenseType.Earning : ExpenseType.Expense} successfully deleted.`);
+      toast.success(`${isEarningType ? TransactionType.Earning : TransactionType.Expense} successfully deleted.`);
 
       navigate(-1);
     } catch (error) {

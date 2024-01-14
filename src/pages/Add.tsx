@@ -5,7 +5,7 @@ import { useStorageContext } from '@context/Storage';
 import { categoryDictionary } from '@const/categoryDictionary';
 import { Expense } from '@const/Expense';
 import { ExpenseGroup } from '@const/Groups';
-import { ExpenseType } from '@const/Variants';
+import { TransactionType } from '@const/Variants';
 
 import Form from '@features/Form';
 
@@ -15,13 +15,13 @@ export default function Page() {
   const { db } = useStorageContext();
 
   const initialStateEarning: Partial<Expense> = {
-    type: ExpenseType.Earning,
+    type: TransactionType.Earning,
     group: ExpenseGroup.Income,
     category: categoryDictionary[ExpenseGroup.Income][0]
   };
 
   const initialStateExpense: Partial<Expense> = {
-    type: ExpenseType.Expense,
+    type: TransactionType.Expense,
     group: ExpenseGroup.Home,
     category: categoryDictionary[ExpenseGroup.Home][0]
   };
@@ -32,7 +32,7 @@ export default function Page() {
     try {
       await db.expenses.add(formData);
 
-      toast.success(`${isEarningType ? ExpenseType.Earning : ExpenseType.Expense} successfully added.`);
+      toast.success(`${isEarningType ? TransactionType.Earning : TransactionType.Expense} successfully added.`);
 
       navigate(-1);
     } catch (error) {

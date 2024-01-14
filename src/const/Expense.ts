@@ -1,12 +1,12 @@
 import { Category } from "./Categories";
 import { ExpenseGroup } from "./Groups";
-import { ExpenseType } from "./Variants";
+import { TransactionType } from "./Variants";
 
 export type Expense = {
     readonly id?: number;
     amount: number;
     text: string;
-    type: `${ExpenseType}`;
+    type: `${TransactionType}`;
     group: `${ExpenseGroup}`;
     category: Category;
     createdAt: Date;

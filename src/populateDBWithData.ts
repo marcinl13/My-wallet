@@ -2,7 +2,7 @@ import { DexieDB } from "@/main";
 import { Category } from "@const/Categories";
 import { Expense } from "@const/Expense";
 import { ExpenseGroup } from "@const/Groups";
-import { ExpenseType } from "@const/Variants";
+import { TransactionType } from "@const/Variants";
 
 const dictionary = {
     [ExpenseGroup.Home]: ["Current", "Gas", "Water", "Heating", "Rent", "Equipment", "Media", "Renovation", "CleaningProducts"],
@@ -18,15 +18,15 @@ const dictionary = {
 
 export function populateDBWithData(db: DexieDB) {
     const entries: Expense[] = [
-        ...generateExpensesForGroup(ExpenseType.Expense, ExpenseGroup.Home),
-        ...generateExpensesForGroup(ExpenseType.Earning, ExpenseGroup.Income),
-        ...generateExpensesForGroup(ExpenseType.Expense, ExpenseGroup.Food),
-        ...generateExpensesForGroup(ExpenseType.Expense, ExpenseGroup.HealthCare),
-        ...generateExpensesForGroup(ExpenseType.Expense, ExpenseGroup.Transport),
-        ...generateExpensesForGroup(ExpenseType.Expense, ExpenseGroup.Clothes),
-        ...generateExpensesForGroup(ExpenseType.Expense, ExpenseGroup.Entertainment),
-        ...generateExpensesForGroup(ExpenseType.Expense, ExpenseGroup.PersonalExpenses),
-        ...generateExpensesForGroup(ExpenseType.Expense, ExpenseGroup.Rest),
+        ...generateExpensesForGroup(TransactionType.Expense, ExpenseGroup.Home),
+        ...generateExpensesForGroup(TransactionType.Earning, ExpenseGroup.Income),
+        ...generateExpensesForGroup(TransactionType.Expense, ExpenseGroup.Food),
+        ...generateExpensesForGroup(TransactionType.Expense, ExpenseGroup.HealthCare),
+        ...generateExpensesForGroup(TransactionType.Expense, ExpenseGroup.Transport),
+        ...generateExpensesForGroup(TransactionType.Expense, ExpenseGroup.Clothes),
+        ...generateExpensesForGroup(TransactionType.Expense, ExpenseGroup.Entertainment),
+        ...generateExpensesForGroup(TransactionType.Expense, ExpenseGroup.PersonalExpenses),
+        ...generateExpensesForGroup(TransactionType.Expense, ExpenseGroup.Rest),
     ];
 
     console.table(entries);
@@ -34,7 +34,7 @@ export function populateDBWithData(db: DexieDB) {
     // db.expenses.clear(); // clear the database
 }
 
-function generateExpensesForGroup(type: ExpenseType, group: ExpenseGroup): Expense[] {
+function generateExpensesForGroup(type: TransactionType, group: ExpenseGroup): Expense[] {
     const randomAmountOfItems = Math.floor(Math.random() * 6) + 3;
     const arr: Expense[] = []
 

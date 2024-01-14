@@ -5,7 +5,7 @@ import { Category } from '@const/Categories';
 import { categoryDictionary } from '@const/categoryDictionary';
 import { Expense, ExpenseId } from '@const/Expense';
 import { ExpenseGroup } from '@const/Groups';
-import { ExpenseType } from '@const/Variants';
+import { TransactionType } from '@const/Variants';
 
 import { ButtonVariant, FormButton } from '@components/FormButton';
 import { FormInput } from '@components/FormInput';
@@ -15,7 +15,7 @@ import { FormSelectGroupCategory } from '@components/FormSelectGroupCategory';
 const baseState: Expense = {
   amount: 0,
   text: '',
-  type: ExpenseType.Expense,
+  type: TransactionType.Expense,
   group: ExpenseGroup.Home,
   category: categoryDictionary[ExpenseGroup.Home][0],
   createdAt: new Date()
