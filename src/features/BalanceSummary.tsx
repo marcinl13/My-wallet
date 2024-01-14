@@ -14,7 +14,7 @@ export default function BalanceSummary() {
   return (
     <section className="flex flex-col col-span-2 gap-6 p-3 rounded-md shadow-md bg-sunglow">
       <div className="flex justify-between">
-        <h2 className="font-bold text-primary">Expenses / Incomes</h2>
+        <h2 className="font-bold text-primary">Cash flow</h2>
         <TimeRangeSelect value={selectedTimeRange} onChange={(timeRange) => setSelectedRange(timeRange)} />
       </div>
 
