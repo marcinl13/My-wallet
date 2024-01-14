@@ -30,7 +30,7 @@ export default function Page() {
 
   const onSubmit = async (formData: Transaction) => {
     try {
-      await db.expenses.add(formData);
+      await db.transactions.add(formData);
 
       toast.success(`${isEarningType ? TransactionType.Earning : TransactionType.Expense} successfully added.`);
 

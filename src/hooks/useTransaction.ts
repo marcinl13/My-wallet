@@ -6,5 +6,5 @@ import { Transaction, TransactionId } from "@const/Transaction";
 export function useTransaction(id: TransactionId): Transaction | undefined {
     const { db } = useStorageContext();
 
-    return useLiveQuery(() => db.expenses.get({ id: id }), [id]) as Transaction | undefined;
+    return useLiveQuery(() => db.transactions.get({ id: id }), [id]) as Transaction | undefined;
 }

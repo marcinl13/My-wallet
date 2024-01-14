@@ -12,6 +12,6 @@ export function useTransactions(timeRange: TimeRange): Transaction[] | undefined
         const startOfRange = dayjs().startOf(timeRange).toDate();
         const endOfRange = dayjs().endOf(timeRange).toDate();
 
-        return db.expenses.where("createdAt").between(startOfRange, endOfRange, true, true).reverse().toArray();
+        return db.transactions.where("createdAt").between(startOfRange, endOfRange, true, true).reverse().toArray();
     }, [timeRange]) as Transaction[] | undefined;
 }

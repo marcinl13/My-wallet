@@ -41,7 +41,7 @@ function FormWrapper({ id, isEarningType }: Props) {
         throw new Error(`Couldn't find the ${isEarningType ? TransactionType.Earning : TransactionType.Expense} id.`);
       }
 
-      await db.expenses.update(formData.id, formData);
+      await db.transactions.update(formData.id, formData);
 
       toast.success(`${isEarningType ? TransactionType.Earning : TransactionType.Expense} successfully updated.`);
 
@@ -57,7 +57,7 @@ function FormWrapper({ id, isEarningType }: Props) {
         throw new Error(`Couldn't find the ${isEarningType ? TransactionType.Earning : TransactionType.Expense} id.`);
       }
 
-      await db.expenses.where('id').equals(id).delete();
+      await db.transactions.where('id').equals(id).delete();
 
       toast.success(`${isEarningType ? TransactionType.Earning : TransactionType.Expense} successfully deleted.`);
 
