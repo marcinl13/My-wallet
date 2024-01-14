@@ -1,5 +1,5 @@
 // TODO: refactor to enum/variant
-type IncomeCategories = "Salary" | "Bonus" | "Scholarship";
+type OtherCategories = "Salary" | "Bonus" | "Scholarship";
 
 type HomeCategories = "Current" | "Gas" | "Water" | "Heating" | "Rent" | "Equipment" | "Media" | "Renovation" | "CleaningProducts";
 
@@ -17,4 +17,4 @@ type RestCategories = "Accommodation" | "Food" | "Attractions";
 
 type ClothesCategories = "Clothes" | "Jewelry" | "Perfume";
 
-export type Category = IncomeCategories | HomeCategories | FoodCategories | TransportCategories | HealthCategories | EntertainmentCategories | PersonalExpensesCategories | RestCategories | ClothesCategories;
+export type Category = OtherCategories | HomeCategories | FoodCategories | TransportCategories | HealthCategories | EntertainmentCategories | PersonalExpensesCategories | RestCategories | ClothesCategories;

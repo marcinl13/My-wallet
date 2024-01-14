@@ -5,25 +5,17 @@ import Dexie, { Table } from 'dexie';
 import App from '@/App.tsx';
 import { StorageProvider } from '@context/Storage';
 import { ToastNotificationProvider } from '@context/ToastNotification';
+import { Transaction } from '@const/Transaction';
 
 import '@/index.css';
-interface Expense {
-  id?: number;
-  type: string;
-  amount: number;
-  text: string;
-  group: string;
-  category: string;
-  createdAt: Date;
-}
 
 export class DexieDB extends Dexie {
-  expenses!: Table<Expense>;
+  transactions!: Table<Transaction>;
 
   constructor() {
-    super('Expense');
+    super('transactions');
     this.version(1).stores({
-      expenses: '++id, type, amount, text, group, category, createdAt' // Primary key and indexed props
+      transactions: '++id, type, amount, text, group, category, createdAt' // Primary key and indexed props
     });
   }
 }

@@ -3,11 +3,11 @@ import { IoIosTrendingDown, IoIosTrendingUp } from 'react-icons/io';
 import { Link } from 'react-router-dom';
 import { twMerge } from 'tailwind-merge';
 
-import { Expense } from '@const/Expense';
 import { TimeRange } from '@const/TimeRanges';
-import { ExpenseType } from '@const/Variants';
-import { useExpenses } from '@hooks/useExpenses';
+import { Transaction } from '@const/Transaction';
+import { TransactionType } from '@const/Variants';
 import { useRelativeTimeFormat } from '@hooks/useRelativeTimeFormat';
+import { useTransactions } from '@hooks/useTransactions';
 
 import { TimeRangeSelect } from '@components/TimeRangeSelect';
 
@@ -20,7 +20,7 @@ enum TabOption {
 export default function RecentlyCreatedList() {
   const [activeTab, setActiveTab] = useState<string>(TabOption.All);
   const [selectedTimeRange, setSelectedRange] = useState(TimeRange.CurrentDay);
-  const expensesWithingTimeRange = useExpenses(selectedTimeRange);
+  const expensesWithingTimeRange = useTransactions(selectedTimeRange);
 
   return (
     <section className="flex flex-col gap-2 p-3 rounded-md shadow-md bg-sunglow">
@@ -43,11 +43,11 @@ export default function RecentlyCreatedList() {
       </div>
 
       {activeTab === TabOption.Earning && (
-        <ExpensesList expenses={expensesWithingTimeRange.filter((ex) => ex.type === ExpenseType.Earning)} />
+        <ExpensesList expenses={expensesWithingTimeRange?.filter((ex) => ex.type === TransactionType.Earning)} />
       )}
 
       {activeTab === TabOption.Expenses && (
-        <ExpensesList expenses={expensesWithingTimeRange.filter((ex) => ex.type === ExpenseType.Expense)} />
+        <ExpensesList expenses={expensesWithingTimeRange?.filter((ex) => ex.type === TransactionType.Expense)} />
       )}
 
       {activeTab === TabOption.All && <ExpensesList expenses={expensesWithingTimeRange} />}
@@ -55,34 +55,34 @@ export default function RecentlyCreatedList() {
   );
 }
 
-function ExpensesList({ expenses }: { expenses: Expense[] }) {
-  if (!expenses.length) {
+function ExpensesList({ expenses }: { expenses?: Transaction[] }) {
+  if (!expenses || !expenses.length) {
     return <p className="flex items-center justify-center h-40 text-lg font-bold md:text-xl text-primary">Not found</p>;
   }
 
   return (
     <div className="flex flex-col h-40 pr-2 overflow-y-auto">
-      {expenses.map((expense: Expense) => (
+      {expenses.map((expense: Transaction) => (
         <ExpensesListItem key={expense.id} expense={expense} />
       ))}
     </div>
   );
 }
 
-function ExpensesListItem({ expense }: { expense: Expense }) {
-  const isIncomeType: boolean = expense.type === ExpenseType.Earning;
+function ExpensesListItem({ expense }: { expense: Transaction }) {
+  const isEarningType: boolean = expense.type === TransactionType.Earning;
   const createdTimeAgo = useRelativeTimeFormat(expense.createdAt);
 
   return (
     <Link
-      to={isIncomeType ? `edit/earning/${expense.id}` : `edit/expense/${expense.id}`}
+      to={isEarningType ? `edit/earning/${expense.id}` : `edit/expense/${expense.id}`}
       className={twMerge(
         'flex items-center gap-4 p-1.5',
-        isIncomeType ? 'text-emerald hover:text-emerald' : 'text-crayola hover:text-crayola'
+        isEarningType ? 'text-emerald hover:text-emerald' : 'text-crayola hover:text-crayola'
       )}>
       <figure className="p-1 bg-white rounded-full">
-        {!isIncomeType && <IoIosTrendingDown size={30} />}
-        {isIncomeType && <IoIosTrendingUp size={30} />}
+        {!isEarningType && <IoIosTrendingDown size={30} />}
+        {isEarningType && <IoIosTrendingUp size={30} />}
       </figure>
 
       <div className="flex flex-col w-full text-primary">

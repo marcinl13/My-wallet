@@ -2,9 +2,9 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import { useStorageContext } from '@context/Storage';
-import { Expense, ExpenseId } from '@const/Expense';
-import { ExpenseType } from '@const/Variants';
-import { useExpense } from '@hooks/useExpense';
+import { Transaction, TransactionId } from '@const/Transaction';
+import { TransactionType } from '@const/Variants';
+import { useTransaction } from '@hooks/useTransaction';
 
 import Form from '@features/Form';
 
@@ -26,24 +26,24 @@ export default function Page() {
   );
 }
 
-type Props = Pick<Expense, 'id'> & {
+type Props = Pick<Transaction, 'id'> & {
   isEarningType: boolean;
 };
 
 function FormWrapper({ id, isEarningType }: Props) {
-  const expense = useExpense(id);
-  const { db } = useStorageContext();
+  const expense = useTransaction(id);
+  const { updateTransaction, deleteTransaction } = useStorageContext();
   const navigate = useNavigate();
 
-  const onSubmit = async (formData: Expense) => {
+  const onSubmit = async (formData: Transaction) => {
     try {
       if (!formData.id) {
-        throw new Error(`Couldn't find the ${isEarningType ? ExpenseType.Earning : ExpenseType.Expense} id.`);
+        throw new Error(`Couldn't find the ${isEarningType ? TransactionType.Earning : TransactionType.Expense} id.`);
       }
 
-      await db.expenses.update(formData.id, formData);
+      await updateTransaction(formData.id, formData);
 
-      toast.success(`${isEarningType ? ExpenseType.Earning : ExpenseType.Expense} successfully updated.`);
+      toast.success(`${isEarningType ? TransactionType.Earning : TransactionType.Expense} successfully updated.`);
 
       navigate(-1);
     } catch (error) {
@@ -51,15 +51,15 @@ function FormWrapper({ id, isEarningType }: Props) {
     }
   };
 
-  const onDelete = async (id: ExpenseId) => {
+  const onDelete = async (id: TransactionId) => {
     try {
       if (!id) {
-        throw new Error(`Couldn't find the ${isEarningType ? ExpenseType.Earning : ExpenseType.Expense} id.`);
+        throw new Error(`Couldn't find the ${isEarningType ? TransactionType.Earning : TransactionType.Expense} id.`);
       }
 
-      await db.expenses.where('id').equals(id).delete();
+      await deleteTransaction(id);
 
-      toast.success(`${isEarningType ? ExpenseType.Earning : ExpenseType.Expense} successfully deleted.`);
+      toast.success(`${isEarningType ? TransactionType.Earning : TransactionType.Expense} successfully deleted.`);
 
       navigate(-1);
     } catch (error) {

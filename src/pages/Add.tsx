@@ -3,9 +3,9 @@ import { toast } from 'react-toastify';
 
 import { useStorageContext } from '@context/Storage';
 import { categoryDictionary } from '@const/categoryDictionary';
-import { Expense } from '@const/Expense';
-import { ExpenseGroup } from '@const/Groups';
-import { ExpenseType } from '@const/Variants';
+import { TransactionGroup } from '@const/Groups';
+import { Transaction } from '@const/Transaction';
+import { TransactionType } from '@const/Variants';
 
 import Form from '@features/Form';
 
@@ -14,25 +14,25 @@ export default function Page() {
   const navigate = useNavigate();
   const { db } = useStorageContext();
 
-  const initialStateEarning: Partial<Expense> = {
-    type: ExpenseType.Earning,
-    group: ExpenseGroup.Income,
-    category: categoryDictionary[ExpenseGroup.Income][0]
+  const initialStateEarning: Partial<Transaction> = {
+    type: TransactionType.Earning,
+    group: TransactionGroup.Other,
+    category: categoryDictionary[TransactionGroup.Other][0]
   };
 
-  const initialStateExpense: Partial<Expense> = {
-    type: ExpenseType.Expense,
-    group: ExpenseGroup.Home,
-    category: categoryDictionary[ExpenseGroup.Home][0]
+  const initialStateExpense: Partial<Transaction> = {
+    type: TransactionType.Expense,
+    group: TransactionGroup.Home,
+    category: categoryDictionary[TransactionGroup.Home][0]
   };
 
   const isEarningType = type === 'earning';
 
-  const onSubmit = async (formData: Expense) => {
+  const onSubmit = async (formData: Transaction) => {
     try {
-      await db.expenses.add(formData);
+      await db.transactions.add(formData);
 
-      toast.success(`${isEarningType ? ExpenseType.Earning : ExpenseType.Expense} successfully added.`);
+      toast.success(`${isEarningType ? TransactionType.Earning : TransactionType.Expense} successfully added.`);
 
       navigate(-1);
     } catch (error) {
