@@ -3,13 +3,13 @@ import { useState } from 'react';
 import { TimeRange } from '@const/TimeRanges';
 import { Transaction } from '@const/Transaction';
 import { TransactionType } from '@const/Variants';
-import { useExpenses } from '@hooks/useExpenses';
+import { useTransactions } from '@hooks/useTransactions';
 
 import { TimeRangeSelect } from '@components/TimeRangeSelect';
 
 export default function BalanceSummary() {
   const [selectedTimeRange, setSelectedRange] = useState(TimeRange.CurrentMonth);
-  const expensesWithingTimeRange = useExpenses(selectedTimeRange);
+  const expensesWithingTimeRange = useTransactions(selectedTimeRange);
 
   return (
     <section className="flex flex-col col-span-2 gap-6 p-3 rounded-md shadow-md bg-sunglow">

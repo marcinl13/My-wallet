@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 import { useStorageContext } from '@context/Storage';
 import { Transaction, TransactionId } from '@const/Transaction';
 import { TransactionType } from '@const/Variants';
-import { useExpense } from '@hooks/useExpense';
+import { useTransaction } from '@hooks/useTransaction';
 
 import Form from '@features/Form';
 
@@ -31,7 +31,7 @@ type Props = Pick<Transaction, 'id'> & {
 };
 
 function FormWrapper({ id, isEarningType }: Props) {
-  const expense = useExpense(id);
+  const expense = useTransaction(id);
   const { db } = useStorageContext();
   const navigate = useNavigate();
 

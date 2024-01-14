@@ -13,13 +13,13 @@ import {
 
 import { ExpenseGroup } from '@const/Groups';
 import { TimeRange } from '@const/TimeRanges';
-import { useExpenses } from '@hooks/useExpenses';
+import { useTransactions } from '@hooks/useTransactions';
 
 import { TimeRangeSelect } from '@components/TimeRangeSelect';
 
 export default function GroupedExpensesSummary() {
   const [selectedTimeRange, setSelectedRange] = useState(TimeRange.CurrentMonth);
-  const expensesWithingTimeRange = useExpenses(selectedTimeRange);
+  const expensesWithingTimeRange = useTransactions(selectedTimeRange);
 
   return (
     <section className="flex flex-col gap-6 p-3 bg-sunglow rounded-md shadow-md text-left">

@@ -6,8 +6,8 @@ import { twMerge } from 'tailwind-merge';
 import { TimeRange } from '@const/TimeRanges';
 import { Transaction } from '@const/Transaction';
 import { TransactionType } from '@const/Variants';
-import { useExpenses } from '@hooks/useExpenses';
 import { useRelativeTimeFormat } from '@hooks/useRelativeTimeFormat';
+import { useTransactions } from '@hooks/useTransactions';
 
 import { TimeRangeSelect } from '@components/TimeRangeSelect';
 
@@ -20,7 +20,7 @@ enum TabOption {
 export default function RecentlyCreatedList() {
   const [activeTab, setActiveTab] = useState<string>(TabOption.All);
   const [selectedTimeRange, setSelectedRange] = useState(TimeRange.CurrentDay);
-  const expensesWithingTimeRange = useExpenses(selectedTimeRange);
+  const expensesWithingTimeRange = useTransactions(selectedTimeRange);
 
   return (
     <section className="flex flex-col gap-2 p-3 rounded-md shadow-md bg-sunglow">
@@ -43,11 +43,11 @@ export default function RecentlyCreatedList() {
       </div>
 
       {activeTab === TabOption.Earning && (
-        <ExpensesList expenses={expensesWithingTimeRange.filter((ex) => ex.type === TransactionType.Earning)} />
+        <ExpensesList expenses={expensesWithingTimeRange?.filter((ex) => ex.type === TransactionType.Earning)} />
       )}
 
       {activeTab === TabOption.Expenses && (
-        <ExpensesList expenses={expensesWithingTimeRange.filter((ex) => ex.type === TransactionType.Expense)} />
+        <ExpensesList expenses={expensesWithingTimeRange?.filter((ex) => ex.type === TransactionType.Expense)} />
       )}
 
       {activeTab === TabOption.All && <ExpensesList expenses={expensesWithingTimeRange} />}
@@ -55,8 +55,8 @@ export default function RecentlyCreatedList() {
   );
 }
 
-function ExpensesList({ expenses }: { expenses: Transaction[] }) {
-  if (!expenses.length) {
+function ExpensesList({ expenses }: { expenses?: Transaction[] }) {
+  if (!expenses || !expenses.length) {
     return <p className="flex items-center justify-center h-40 text-lg font-bold md:text-xl text-primary">Not found</p>;
   }
 

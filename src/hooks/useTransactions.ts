@@ -5,15 +5,13 @@ import { useStorageContext } from "@context/Storage";
 import { TimeRange } from "@const/TimeRanges";
 import { Transaction } from "@const/Transaction";
 
-export function useExpenses(timeRange: TimeRange): Transaction[] {
+export function useTransactions(timeRange: TimeRange): Transaction[] | undefined {
     const { db } = useStorageContext();
 
-    const expensesWithingTimeRange = useLiveQuery(() => {
+    return useLiveQuery(() => {
         const startOfRange = dayjs().startOf(timeRange).toDate();
         const endOfRange = dayjs().endOf(timeRange).toDate();
 
         return db.expenses.where("createdAt").between(startOfRange, endOfRange, true, true).reverse().toArray();
-    }, [timeRange]) || [];
-
-    return expensesWithingTimeRange as Transaction[];
+    }, [timeRange]) as Transaction[] | undefined;
 }
