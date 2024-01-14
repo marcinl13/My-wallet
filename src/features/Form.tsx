@@ -3,8 +3,8 @@ import { twMerge } from 'tailwind-merge';
 
 import { Category } from '@const/Categories';
 import { categoryDictionary } from '@const/categoryDictionary';
-import { Expense, ExpenseId } from '@const/Expense';
 import { ExpenseGroup } from '@const/Groups';
+import { Transaction, TransactionId } from '@const/Transaction';
 import { TransactionType } from '@const/Variants';
 
 import { ButtonVariant, FormButton } from '@components/FormButton';
@@ -12,7 +12,7 @@ import { FormInput } from '@components/FormInput';
 import { FormSelectGroup } from '@components/FormSelectGroup';
 import { FormSelectGroupCategory } from '@components/FormSelectGroupCategory';
 
-const baseState: Expense = {
+const baseState: Transaction = {
   amount: 0,
   text: '',
   type: TransactionType.Expense,
@@ -22,16 +22,19 @@ const baseState: Expense = {
 };
 
 type FormProps = {
-  initialState?: Partial<Expense>;
-  onSubmit: (formData: Expense) => void;
-  onDelete: (id: ExpenseId) => void;
+  initialState?: Partial<Transaction>;
+  onSubmit: (formData: Transaction) => void;
+  onDelete: (id: TransactionId) => void;
 };
 
 export default function Form({ initialState, onSubmit, onDelete }: FormProps) {
-  const [formData, setFormData] = useReducer((prev: Expense, curr: Partial<Expense>) => ({ ...prev, ...curr }), {
-    ...baseState,
-    ...initialState
-  });
+  const [formData, setFormData] = useReducer(
+    (prev: Transaction, curr: Partial<Transaction>) => ({ ...prev, ...curr }),
+    {
+      ...baseState,
+      ...initialState
+    }
+  );
 
   const onFromSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -87,7 +90,7 @@ export default function Form({ initialState, onSubmit, onDelete }: FormProps) {
       </fieldset>
 
       <section className={twMerge('grid gap-3', !!formData?.id && 'grid-cols-1 md:grid-cols-2')}>
-        <FormButton type="submit" variant={ButtonVariant.Save} text={!!formData?.id ? 'Update' : 'Save'} />
+        <FormButton type="submit" variant={ButtonVariant.Save} text={formData?.id ? 'Update' : 'Save'} />
 
         {!!formData?.id && (
           <FormButton

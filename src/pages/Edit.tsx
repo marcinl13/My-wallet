@@ -2,7 +2,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import { useStorageContext } from '@context/Storage';
-import { Expense, ExpenseId } from '@const/Expense';
+import { Transaction, TransactionId } from '@const/Transaction';
 import { TransactionType } from '@const/Variants';
 import { useExpense } from '@hooks/useExpense';
 
@@ -26,7 +26,7 @@ export default function Page() {
   );
 }
 
-type Props = Pick<Expense, 'id'> & {
+type Props = Pick<Transaction, 'id'> & {
   isEarningType: boolean;
 };
 
@@ -35,7 +35,7 @@ function FormWrapper({ id, isEarningType }: Props) {
   const { db } = useStorageContext();
   const navigate = useNavigate();
 
-  const onSubmit = async (formData: Expense) => {
+  const onSubmit = async (formData: Transaction) => {
     try {
       if (!formData.id) {
         throw new Error(`Couldn't find the ${isEarningType ? TransactionType.Earning : TransactionType.Expense} id.`);
@@ -51,7 +51,7 @@ function FormWrapper({ id, isEarningType }: Props) {
     }
   };
 
-  const onDelete = async (id: ExpenseId) => {
+  const onDelete = async (id: TransactionId) => {
     try {
       if (!id) {
         throw new Error(`Couldn't find the ${isEarningType ? TransactionType.Earning : TransactionType.Expense} id.`);

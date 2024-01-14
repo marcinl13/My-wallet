@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
-import { Expense } from '@const/Expense';
 import { TimeRange } from '@const/TimeRanges';
+import { Transaction } from '@const/Transaction';
 import { TransactionType } from '@const/Variants';
 import { useExpenses } from '@hooks/useExpenses';
 
@@ -23,15 +23,15 @@ export default function BalanceSummary() {
   );
 }
 
-function Summary({ expensesWithingTimeRange }: { expensesWithingTimeRange: Expense[] }) {
+function Summary({ expensesWithingTimeRange }: { expensesWithingTimeRange: Transaction[] }) {
   const income: number =
     expensesWithingTimeRange
-      ?.filter((e: Expense) => e.type === TransactionType.Earning)
+      ?.filter((e: Transaction) => e.type === TransactionType.Earning)
       .reduce((n, { amount }) => n + amount, 0) || 0;
 
   const expense: number =
     expensesWithingTimeRange
-      ?.filter((e: Expense) => e.type === TransactionType.Expense)
+      ?.filter((e: Transaction) => e.type === TransactionType.Expense)
       .reduce((n, { amount }) => n + amount, 0) || 0;
 
   const balance: number = income - expense;

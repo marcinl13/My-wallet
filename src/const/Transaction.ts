@@ -2,7 +2,7 @@ import { Category } from "./Categories";
 import { ExpenseGroup } from "./Groups";
 import { TransactionType } from "./Variants";
 
-export type Expense = {
+export type Transaction = {
     readonly id?: number;
     amount: number;
     text: string;
@@ -12,4 +12,4 @@ export type Expense = {
     createdAt: Date;
 };
 
-export type ExpenseId = Expense["id"];
+export type TransactionId = Transaction["id"];

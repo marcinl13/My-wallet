@@ -3,8 +3,8 @@ import { IoIosTrendingDown, IoIosTrendingUp } from 'react-icons/io';
 import { Link } from 'react-router-dom';
 import { twMerge } from 'tailwind-merge';
 
-import { Expense } from '@const/Expense';
 import { TimeRange } from '@const/TimeRanges';
+import { Transaction } from '@const/Transaction';
 import { TransactionType } from '@const/Variants';
 import { useExpenses } from '@hooks/useExpenses';
 import { useRelativeTimeFormat } from '@hooks/useRelativeTimeFormat';
@@ -55,21 +55,21 @@ export default function RecentlyCreatedList() {
   );
 }
 
-function ExpensesList({ expenses }: { expenses: Expense[] }) {
+function ExpensesList({ expenses }: { expenses: Transaction[] }) {
   if (!expenses.length) {
     return <p className="flex items-center justify-center h-40 text-lg font-bold md:text-xl text-primary">Not found</p>;
   }
 
   return (
     <div className="flex flex-col h-40 pr-2 overflow-y-auto">
-      {expenses.map((expense: Expense) => (
+      {expenses.map((expense: Transaction) => (
         <ExpensesListItem key={expense.id} expense={expense} />
       ))}
     </div>
   );
 }
 
-function ExpensesListItem({ expense }: { expense: Expense }) {
+function ExpensesListItem({ expense }: { expense: Transaction }) {
   const isIncomeType: boolean = expense.type === TransactionType.Earning;
   const createdTimeAgo = useRelativeTimeFormat(expense.createdAt);
 
