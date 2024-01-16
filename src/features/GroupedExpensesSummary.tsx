@@ -53,8 +53,8 @@ function GroupExpenseItem({
   iconSize?: number;
 }) {
   return (
-    <li className="flex items-center justify-between font-semibold text-white bg-primary rounded-lg p-2">
-      <figure className="bg-white text-secondary rounded-md">
+    <li className="flex items-center justify-between bg-primary rounded-lg p-2" data-testid={`${group}-item`}>
+      <figure className="bg-white text-secondary rounded-md" data-testid={`${group}-item-icon`}>
         {group === TransactionGroup.Other && <IoMdCash size={iconSize} />}
         {group === TransactionGroup.Home && <IoIosHome size={iconSize} />}
         {group === TransactionGroup.Food && <IoIosBasket size={iconSize} />}
@@ -66,10 +66,12 @@ function GroupExpenseItem({
         {group === TransactionGroup.Clothes && <IoIosCut size={iconSize} />}
       </figure>
 
-      {amount.toLocaleString('en-us', {
-        style: 'currency',
-        currency: 'USD'
-      })}
+      <span className="font-semibold text-white" data-testid={`${group}-item-amount`}>
+        {amount.toLocaleString('en-us', {
+          style: 'currency',
+          currency: 'USD'
+        })}
+      </span>
     </li>
   );
 }

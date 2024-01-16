@@ -20,7 +20,8 @@ export function FormSelectGroupCategory(props: FormSelectProps) {
       <select
         {...inputProps}
         className="bg-white border text-primary text-sm rounded-lg block w-full p-2.5"
-        aria-label="category select">
+        aria-label="category select"
+        data-testid="select-category">
         {Object.values(categoryDictionary[group]).map((val) => (
           <option key={val} value={val}>
             {val}

@@ -42,7 +42,9 @@ export default function Page() {
 
   return (
     <>
-      <h1 className="text-lg font-bold text-center text-white">{isEarningType ? 'New earning' : 'New expense'}</h1>
+      <h1 className="text-lg font-bold text-center text-white" data-testid="heading">
+        {isEarningType ? 'New earning' : 'New expense'}
+      </h1>
 
       <Form
         initialState={isEarningType ? initialStateEarning : initialStateExpense}

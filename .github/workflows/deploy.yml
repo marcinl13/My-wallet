@@ -22,5 +22,8 @@ jobs:
       - name: Verify lint
         run: npm lint
 
+      - name: Run cypress e2e
+        run: npm run cy:e2e
+
       # - name: Build
       #   run: npm build
