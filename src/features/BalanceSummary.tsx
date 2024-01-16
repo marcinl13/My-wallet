@@ -39,6 +39,7 @@ function Summary({ expensesWithingTimeRange }: { expensesWithingTimeRange: Trans
   return (
     <ul className="grid h-24 grid-cols-3 font-medium text-white bg-primary">
       <li
+        data-testid="balance-summary-earning-amount"
         className="flex items-center justify-start gap-2 p-2 bg-emerald"
         style={{
           clipPath: 'polygon(0% 0%, 75% 0%, 100% 50%, 75% 100%, 0% 100%)'
@@ -49,7 +50,7 @@ function Summary({ expensesWithingTimeRange }: { expensesWithingTimeRange: Trans
         })}
       </li>
 
-      <li className="flex items-center justify-center gap-2 p-2">
+      <li data-testid="balance-summary-diff-amount" className="flex items-center justify-center gap-2 p-2">
         {balance.toLocaleString('en-us', {
           style: 'currency',
           currency: 'USD'
@@ -57,6 +58,7 @@ function Summary({ expensesWithingTimeRange }: { expensesWithingTimeRange: Trans
       </li>
 
       <li
+        data-testid="balance-summary-expense-amount"
         className="flex items-center justify-end gap-2 p-2 bg-crayola"
         style={{ clipPath: 'polygon(25% 0%, 100% 0%, 100% 100%, 25% 100%, 0% 50%)' }}>
         {expense.toLocaleString('en-us', {

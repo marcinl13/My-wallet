@@ -61,7 +61,7 @@ function ExpensesList({ expenses }: { expenses?: Transaction[] }) {
   }
 
   return (
-    <div className="flex flex-col h-40 pr-2 overflow-y-auto">
+    <div className="flex flex-col h-40 pr-2 overflow-y-auto" data-testid="list">
       {expenses.map((expense: Transaction) => (
         <ExpensesListItem key={expense.id} expense={expense} />
       ))}
@@ -74,26 +74,30 @@ function ExpensesListItem({ expense }: { expense: Transaction }) {
   const createdTimeAgo = useRelativeTimeFormat(expense.createdAt);
 
   return (
-    <Link
+    <Link data-testid={`list-item-${expense.id}`}
       to={isEarningType ? `edit/earning/${expense.id}` : `edit/expense/${expense.id}`}
       className={twMerge(
         'flex items-center gap-4 p-1.5',
         isEarningType ? 'text-emerald hover:text-emerald' : 'text-crayola hover:text-crayola'
       )}>
-      <figure className="p-1 bg-white rounded-full">
-        {!isEarningType && <IoIosTrendingDown size={30} />}
-        {isEarningType && <IoIosTrendingUp size={30} />}
+      <figure className="p-1 bg-white rounded-full" data-testid={`list-item-icon`}>
+        {!isEarningType && <IoIosTrendingDown size={30} data-testid={`list-item-icon-expense`} />}
+        {isEarningType && <IoIosTrendingUp size={30} data-testid={`list-item-icon-earning`} />}
       </figure>
 
       <div className="flex flex-col w-full text-primary">
-        <p className="overflow-x-hidden font-bold text-ellipsis max-w-[40vw] md:max-w-none whitespace-nowrap">
+        <p
+          className="overflow-x-hidden font-bold text-ellipsis max-w-[40vw] md:max-w-none whitespace-nowrap"
+          data-testid={`list-item-text`}>
           {expense.text}
         </p>
 
-        <p className="text-xs">{createdTimeAgo}</p>
+        <p className="text-xs" data-testid={`list-item-time`}>
+          {createdTimeAgo}
+        </p>
       </div>
 
-      <div className="font-bold">
+      <div className="font-bold" data-testid={`list-item-amount`}>
         {expense.amount.toLocaleString('en-us', {
           style: 'currency',
           currency: 'USD'

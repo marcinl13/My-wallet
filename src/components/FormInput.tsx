@@ -13,7 +13,11 @@ export function FormInput(props: FieldInputProps) {
         {label}
       </label>
 
-      <input {...inputProps} className="bg-white border text-primary text-sm rounded-lg block w-full p-2.5" />
+      <input
+        {...inputProps}
+        data-testid={`input-${inputProps.id}`}
+        className="bg-white border text-primary text-sm rounded-lg block w-full p-2.5"
+      />
     </div>
   );
 }

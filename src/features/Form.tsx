@@ -62,7 +62,7 @@ export default function Form({ initialState, onSubmit, onDelete }: FormProps) {
           id="amount"
           value={formData.amount}
           placeholder="0"
-          onChange={(e) => setFormData({ amount: e.target.valueAsNumber || 0 })}
+          onChange={(e) => setFormData({ amount: e.target.valueAsNumber })}
         />
 
         <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
@@ -90,11 +90,17 @@ export default function Form({ initialState, onSubmit, onDelete }: FormProps) {
       </fieldset>
 
       <section className={twMerge('grid gap-3', !!formData?.id && 'grid-cols-1 md:grid-cols-2')}>
-        <FormButton type="submit" variant={ButtonVariant.Save} text={formData?.id ? 'Update' : 'Save'} />
+        <FormButton
+          type="submit"
+          variant={ButtonVariant.Save}
+          text={formData?.id ? 'Update' : 'Save'}
+          data-testid="btn-save"
+        />
 
         {!!formData?.id && (
           <FormButton
             type="button"
+            data-testid="btn-delete"
             variant={ButtonVariant.Delete}
             text="Delete"
             onClick={() => onDelete(formData.id)}
