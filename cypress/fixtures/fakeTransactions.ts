@@ -73,6 +73,9 @@ const transactions: Transaction[] = [
 
 export const fakeTransactions = transactions; //.sort(() => Math.random() - 0.5);
 
+export const expenseList = transactions.filter(t => t.type === TransactionType.Expense);
+export const earningList = transactions.filter(t => t.type === TransactionType.Earning);
+
 export const fakeExpense = transactions.filter(f => f.type === TransactionType.Expense)[0];
 
 export const fakeEarning = transactions.filter(f => f.type === TransactionType.Earning)[0];

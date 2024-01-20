@@ -36,7 +36,14 @@ export const selector = {
       earning: '[data-testid="list-tab-earning"]',
       expense: '[data-testid="list-tab-expenses"]',
     },
-    list: '[data-testid="list"]'
+    list: '[data-testid="list"]',
+    listItem: {
+      title: '[data-testid="list-item-text"]',
+      amount: '[data-testid="list-item-amount"]',
+      time: '[data-testid="list-item-time"]',
+      iconExpense: '[data-testid="list-item-icon-expense"]',
+      iconEarning: '[data-testid="list-item-icon-earning"]',
+    }
   }
 };
 
