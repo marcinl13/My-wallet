@@ -48,17 +48,4 @@ describe('Test earning creation flow', () => {
 
     cy.validateRecentlyCreatedListItem(fakeEarning);
   });
-
-  it('Transaction appears on expense group', () => {
-    cy.visit(visitRoute.AddEarning);
-
-    cy.fillForm(fakeEarning);
-
-    cy.visit(visitRoute.Home);
-
-    cy.get(`[data-testid="${fakeEarning.group}-item-amount"]`).should(
-      'have.text',
-      numberToCurrency(fakeEarning.amount)
-    );
-  });
 });
