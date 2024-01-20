@@ -12,7 +12,7 @@ describe('Test transaction group widget', () => {
     fakeTransactions.map((t) => cy.getStore('@objectStore').addItem(t));
   });
 
-  it('Chosen tab filters transaction', () => {
+  it('Filter transactions after clicking tab', () => {
     cy.visit(visitRoute.Home);
 
     const transactions = fakeTransactions.filter((t) => t.type === TransactionType.Expense);

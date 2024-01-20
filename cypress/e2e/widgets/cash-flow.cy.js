@@ -1,6 +1,5 @@
-import { TransactionType } from '../../../src/const/Variants';
-import { fakeTransactions } from '../../fixtures/fakeTransactions';
-import { numberToCurrency, selector, visitRoute } from '../../support/utils';
+import { earningList, expenseList, fakeTransactions } from '../../fixtures/fakeTransactions';
+import { numberToCurrency, selector, sumTransactions, visitRoute } from '../../support/utils';
 
 describe('Test cash flow component', () => {
   beforeEach(() => {
@@ -14,14 +13,8 @@ describe('Test cash flow component', () => {
   it('Transaction should change cash flow ', () => {
     cy.visit(visitRoute.Home);
 
-    const incomeAmount = fakeTransactions
-      .filter((t) => t.type === TransactionType.Earning)
-      .reduce((acc, cur) => acc + cur.amount, 0);
-
-    const expenseAmount = fakeTransactions
-      .filter((t) => t.type === TransactionType.Expense)
-      .reduce((acc, cur) => acc + cur.amount, 0);
-
+    const incomeAmount = sumTransactions(earningList);
+    const expenseAmount = sumTransactions(expenseList);
     const diffAmount = incomeAmount - expenseAmount;
 
     cy.get(selector.balanceSummary.earningAmountSelector).should('have.text', numberToCurrency(incomeAmount));

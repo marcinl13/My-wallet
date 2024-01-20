@@ -16,7 +16,7 @@ describe('Test edit expense transaction', () => {
   it('Update data', () => {
     cy.visit(visitRoute.Home);
 
-    // Pick first earning on the list
+    // Pick first expense on the list
     cy.get(selector.recentlyAdded.tab.expense).click();
     cy.get(selector.recentlyAdded.list).children().first().click();
 

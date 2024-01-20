@@ -46,30 +46,26 @@ import { numberToCurrency, selector } from './utils';
 declare global {
   namespace Cypress {
     interface Chainable {
-      fillForm(expense: Transaction): Chainable<void>
-      validateRecentlyCreatedListItem(expense: Transaction): Chainable<void>
-      clearTransactions(): Chainable<Element>
-      openTransactions(): Chainable<Element>
-      createTransactionsObjectStore(): Chainable<Element>
+      fillForm(expense: Transaction): Chainable<void>;
+      validateRecentlyCreatedListItem(expense: Transaction): Chainable<void>;
+      clearTransactions(): Chainable<Element>;
+      openTransactions(): Chainable<Element>;
+      createTransactionsObjectStore(): Chainable<Element>;
     }
   }
 }
 
-Cypress.Commands.add('clearTransactions', () =>
-  cy.clearIndexedDb('transactions')
-);
+Cypress.Commands.add('clearTransactions', () => cy.clearIndexedDb('transactions'));
 
 Cypress.Commands.add('openTransactions', () => {
   cy.openIndexedDb('transactions');
 });
 
 Cypress.Commands.add('createTransactionsObjectStore', () => {
-  cy.openTransactions()
-    .as('formCacheDB')
-    .createObjectStore('transactions', {
-      keyPath: 'id',
-      autoIncrement: true
-    });
+  cy.openTransactions().as('formCacheDB').createObjectStore('transactions', {
+    keyPath: 'id',
+    autoIncrement: true
+  });
 });
 
 Cypress.Commands.add('fillForm', (expense: Transaction) => {
@@ -85,11 +81,14 @@ Cypress.Commands.add('validateRecentlyCreatedListItem', (expense: Transaction) =
 
   cy.get(selector.recentlyAdded.list).children().should('have.length', 1);
 
-  cy.get(`[data-testid="list-item-icon"]`).children().should('have.length', 1);
-  cy.get(`[data-testid="list-item-icon-expense"]`).should(expense.type === TransactionType.Expense ? 'be.visible' : 'not.exist');
-  cy.get(`[data-testid="list-item-icon-earning"]`).should(expense.type === TransactionType.Earning ? 'be.visible' : 'not.exist');
+  cy.get(selector.recentlyAdded.listItem.iconExpense).should(
+    expense.type === TransactionType.Expense ? 'be.visible' : 'not.exist'
+  );
+  cy.get(selector.recentlyAdded.listItem.iconEarning).should(
+    expense.type === TransactionType.Earning ? 'be.visible' : 'not.exist'
+  );
 
-  cy.get(`[data-testid="list-item-text"]`).should('have.text', expense.text);
-  cy.get(`[data-testid="list-item-time"]`).should('have.text', createdTimeAgo);
-  cy.get(`[data-testid="list-item-amount"]`).should('have.text', numberToCurrency(expense.amount));
+  cy.get(selector.recentlyAdded.listItem.title).should('have.text', expense.text);
+  cy.get(selector.recentlyAdded.listItem.time).should('have.text', createdTimeAgo);
+  cy.get(selector.recentlyAdded.listItem.amount).should('have.text', numberToCurrency(expense.amount));
 });

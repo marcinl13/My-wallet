@@ -1,5 +1,4 @@
-import { TransactionType } from '../../src/const/Variants';
-import { fakeTransactions } from '../fixtures/fakeTransactions';
+import { expenseList, fakeTransactions } from '../fixtures/fakeTransactions';
 import { selector, visitRoute } from '../support/utils';
 
 describe('Test expense transaction removal', () => {
@@ -18,10 +17,10 @@ describe('Test expense transaction removal', () => {
     cy.get(selector.recentlyAdded.list).children().first().click();
     cy.get(selector.form.btnDelete).click();
 
-    const expenseAmount = fakeTransactions.filter((t) => t.type === TransactionType.Expense).length - 1;
-
     cy.visit(visitRoute.Home);
     cy.get(selector.recentlyAdded.tab.expense).click();
-    cy.get(selector.recentlyAdded.list).children().should('have.length', expenseAmount);
+    cy.get(selector.recentlyAdded.list)
+      .children()
+      .should('have.length', expenseList.length - 1);
   });
 });

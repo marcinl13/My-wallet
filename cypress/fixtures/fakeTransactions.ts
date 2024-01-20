@@ -1,8 +1,7 @@
-import { Transaction } from "../../src/const/Transaction";
-import { TransactionGroup } from "../../src/const/Groups";
-import { TransactionType } from "../../src/const/Variants";
-import { categoryDictionary } from "../../src/const/categoryDictionary";
-
+import { Transaction } from '../../src/const/Transaction';
+import { TransactionGroup } from '../../src/const/Groups';
+import { TransactionType } from '../../src/const/Variants';
+import { categoryDictionary } from '../../src/const/categoryDictionary';
 
 const transactions: Transaction[] = [
   {
@@ -73,9 +72,9 @@ const transactions: Transaction[] = [
 
 export const fakeTransactions = transactions; //.sort(() => Math.random() - 0.5);
 
-export const expenseList = transactions.filter(t => t.type === TransactionType.Expense);
-export const earningList = transactions.filter(t => t.type === TransactionType.Earning);
+export const expenseList = transactions.filter((t) => t.type === TransactionType.Expense);
+export const earningList = transactions.filter((t) => t.type === TransactionType.Earning);
 
-export const fakeExpense = transactions.filter(f => f.type === TransactionType.Expense)[0];
+export const fakeExpense = transactions.filter((t) => t.type === TransactionType.Expense)[0];
 
-export const fakeEarning = transactions.filter(f => f.type === TransactionType.Earning)[0];
+export const fakeEarning = transactions.filter((t) => t.type === TransactionType.Earning)[0];
