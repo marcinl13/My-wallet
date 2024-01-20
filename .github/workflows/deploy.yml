@@ -1,9 +1,9 @@
-name: Verify lint
+name: Deploy
 
 on: push
 
 jobs:
-  verify_lint:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -27,3 +27,5 @@ jobs:
 
       # - name: Build
       #   run: npm build
+
+      # Deployment to hosting

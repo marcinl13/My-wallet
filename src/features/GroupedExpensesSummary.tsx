@@ -13,16 +13,16 @@ import {
 
 import { TransactionGroup } from '@const/Groups';
 import { TimeRange } from '@const/TimeRanges';
-import { useTransactions } from '@hooks/useTransactions';
+import { useGroupTransactions } from '@hooks/useGroupTransactions';
 
 import { TimeRangeSelect } from '@components/TimeRangeSelect';
 
 export default function GroupedExpensesSummary() {
   const [selectedTimeRange, setSelectedRange] = useState(TimeRange.CurrentMonth);
-  const expensesWithingTimeRange = useTransactions(selectedTimeRange);
+  const expensesWithingTimeRange = useGroupTransactions(selectedTimeRange);
 
   return (
-    <section className="flex flex-col gap-6 p-3 bg-sunglow rounded-md shadow-md text-left">
+    <section className="flex flex-col gap-6 p-3 text-left rounded-md shadow-md bg-sunglow">
       <div className="flex justify-between">
         <h2 className="font-bold text-primary">Expenses by group</h2>
         <TimeRangeSelect value={selectedTimeRange} onChange={(timeRange: TimeRange) => setSelectedRange(timeRange)} />
@@ -53,8 +53,8 @@ function GroupExpenseItem({
   iconSize?: number;
 }) {
   return (
-    <li className="flex items-center justify-between bg-primary rounded-lg p-2" data-testid={`${group}-item`}>
-      <figure className="bg-white text-secondary rounded-md" data-testid={`${group}-item-icon`}>
+    <li className="flex items-center justify-between p-2 rounded-lg bg-primary" data-testid={`${group}-item`}>
+      <figure className="bg-white rounded-md text-secondary" data-testid={`${group}-item-icon`}>
         {group === TransactionGroup.Other && <IoMdCash size={iconSize} />}
         {group === TransactionGroup.Home && <IoIosHome size={iconSize} />}
         {group === TransactionGroup.Food && <IoIosBasket size={iconSize} />}

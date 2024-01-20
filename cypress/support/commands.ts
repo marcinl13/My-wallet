@@ -38,37 +38,57 @@
 
 import '@this-dot/cypress-indexeddb';
 
-import { Expense } from '../../src/const/Expense';
+import { Transaction } from '../../src/const/Transaction';
 import { TransactionType } from '../../src/const/Variants';
 import { useRelativeTimeFormat } from '../../src/hooks/useRelativeTimeFormat';
 import { numberToCurrency, selector } from './utils';
 
-Cypress.Commands.add('getBySel', (selector, ...args) => {
-  return cy.get(`[data-testid=${selector}]`, ...args)
-})
+declare global {
+  namespace Cypress {
+    interface Chainable {
+      fillForm(expense: Transaction): Chainable<void>;
+      validateRecentlyCreatedListItem(expense: Transaction): Chainable<void>;
+      clearTransactions(): Chainable<Element>;
+      openTransactions(): Chainable<Element>;
+      createTransactionsObjectStore(): Chainable<Element>;
+    }
+  }
+}
 
-Cypress.Commands.add('fillForm', (expense: Expense) => {
+Cypress.Commands.add('clearTransactions', () => cy.clearIndexedDb('transactions'));
+
+Cypress.Commands.add('openTransactions', () => {
+  cy.openIndexedDb('transactions');
+});
+
+Cypress.Commands.add('createTransactionsObjectStore', () => {
+  cy.openTransactions().as('formCacheDB').createObjectStore('transactions', {
+    keyPath: 'id',
+    autoIncrement: true
+  });
+});
+
+Cypress.Commands.add('fillForm', (expense: Transaction) => {
   cy.get(selector.form.inputTitle).clear().type(expense.text);
   cy.get(selector.form.inputAmount).clear().type(expense.amount.toString());
   cy.get(selector.form.selectGroup).select(expense.group);
   cy.get(selector.form.selectCategory).select(expense.category);
   cy.get(selector.form.btnSubmit).click();
-})
+});
 
-Cypress.Commands.add('validateRecentlyCreatedListItem', (expense: Expense) => {
+Cypress.Commands.add('validateRecentlyCreatedListItem', (expense: Transaction) => {
   const createdTimeAgo = useRelativeTimeFormat(expense.createdAt);
 
-  cy.get('[data-testid="list"]').children().should('have.length', 1);
+  cy.get(selector.recentlyAdded.list).children().should('have.length', 1);
 
-  cy.get(`[data-testid="list-item-icon"]`).children().should('have.length', 1);
-  cy.get(`[data-testid="list-item-icon-expense"]`).should(expense.type === TransactionType.Expense ? 'be.visible' : 'not.exist');
-  cy.get(`[data-testid="list-item-icon-earning"]`).should(expense.type === TransactionType.Earning ? 'be.visible' : 'not.exist');
+  cy.get(selector.recentlyAdded.listItem.iconExpense).should(
+    expense.type === TransactionType.Expense ? 'be.visible' : 'not.exist'
+  );
+  cy.get(selector.recentlyAdded.listItem.iconEarning).should(
+    expense.type === TransactionType.Earning ? 'be.visible' : 'not.exist'
+  );
 
-  cy.get(`[data-testid="list-item-text"]`).should('have.text', expense.text);
-  cy.get(`[data-testid="list-item-time"]`).should('have.text', createdTimeAgo);
-  cy.get(`[data-testid="list-item-amount"]`).should('have.text', numberToCurrency(expense.amount));
-})
-
-Cypress.Commands.add('clearTransactionsDB', (expense: Expense) => {
-  cy.clearIndexedDb('transactions');
-})
+  cy.get(selector.recentlyAdded.listItem.title).should('have.text', expense.text);
+  cy.get(selector.recentlyAdded.listItem.time).should('have.text', createdTimeAgo);
+  cy.get(selector.recentlyAdded.listItem.amount).should('have.text', numberToCurrency(expense.amount));
+});
