@@ -1,7 +1,7 @@
 import { fakeEarning } from '../fixtures/fakeTransactions';
 import { numberToCurrency, selector, visitRoute } from '../support/utils';
 
-describe('Test earning creation flow', () => {
+describe('Test add earning transaction flow', () => {
   beforeEach(() => {
     cy.clearTransactions();
   });

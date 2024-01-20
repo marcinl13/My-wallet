@@ -1,6 +1,6 @@
-import { TransactionType } from '../../src/const/Variants';
-import { fakeTransactions } from '../fixtures/fakeTransactions';
-import { selector, visitRoute } from '../support/utils';
+import { TransactionType } from '../../../src/const/Variants';
+import { fakeTransactions } from '../../fixtures/fakeTransactions';
+import { selector, visitRoute } from '../../support/utils';
 
 describe('Test recently added widget', () => {
   beforeEach(() => {

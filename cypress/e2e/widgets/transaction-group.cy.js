@@ -1,7 +1,7 @@
-import { TransactionGroup } from '../../src/const/Groups';
-import { TransactionType } from '../../src/const/Variants';
-import { fakeTransactions } from '../fixtures/fakeTransactions';
-import { numberToCurrency, sumTransactions, visitRoute } from '../support/utils';
+import { TransactionGroup } from '../../../src/const/Groups';
+import { TransactionType } from '../../../src/const/Variants';
+import { fakeTransactions } from '../../fixtures/fakeTransactions';
+import { numberToCurrency, sumTransactions, visitRoute } from '../../support/utils';
 
 describe('Test transaction group widget', () => {
   beforeEach(() => {

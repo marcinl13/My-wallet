@@ -1,7 +1,7 @@
 import { fakeExpense } from '../fixtures/fakeTransactions';
 import { numberToCurrency, selector, visitRoute } from '../support/utils';
 
-describe('Test expense creation flow', () => {
+describe('Test add expense transaction flow', () => {
   beforeEach(() => {
     cy.clearTransactions();
   });

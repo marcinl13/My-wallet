@@ -1,6 +1,6 @@
-import { TransactionType } from '../../src/const/Variants';
-import { fakeTransactions } from '../fixtures/fakeTransactions';
-import { numberToCurrency, selector, visitRoute } from '../support/utils';
+import { TransactionType } from '../../../src/const/Variants';
+import { fakeTransactions } from '../../fixtures/fakeTransactions';
+import { numberToCurrency, selector, visitRoute } from '../../support/utils';
 
 describe('Test cash flow component', () => {
   beforeEach(() => {
