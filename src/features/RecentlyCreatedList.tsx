@@ -34,6 +34,7 @@ export default function RecentlyCreatedList() {
           {Object.keys(TabOption).map((tab) => (
             <li
               key={tab}
+              data-testid={`list-tab-${tab.toLocaleLowerCase()}`}
               className={twMerge('hover:cursor-pointer', activeTab === tab && 'bg-secondary text-white')}
               onClick={() => setActiveTab(tab)}>
               {tab}
@@ -74,7 +75,8 @@ function ExpensesListItem({ expense }: { expense: Transaction }) {
   const createdTimeAgo = useRelativeTimeFormat(expense.createdAt);
 
   return (
-    <Link data-testid={`list-item-${expense.id}`}
+    <Link
+      data-testid={`list-item-${expense.id}`}
       to={isEarningType ? `edit/earning/${expense.id}` : `edit/expense/${expense.id}`}
       className={twMerge(
         'flex items-center gap-4 p-1.5',

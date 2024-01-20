@@ -71,7 +71,7 @@ const transactions: Transaction[] = [
   }
 ];
 
-export const fakeTransactions = transactions.sort(() => Math.random() - 0.5);
+export const fakeTransactions = transactions; //.sort(() => Math.random() - 0.5);
 
 export const fakeExpense = transactions.filter(f => f.type === TransactionType.Expense)[0];
 

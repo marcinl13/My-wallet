@@ -22,6 +22,14 @@ export const selector = {
     selectCategory: '[data-testid="select-category"]',
     btnSubmit: '[data-testid="btn-save"]',
     btnDelete: '[data-testid="btn-delete"]',
+  },
+  recentlyAdded: {
+    tab: {
+      all: '[data-testid="list-tab-all"]',
+      earning: '[data-testid="list-tab-earning"]',
+      expense: '[data-testid="list-tab-expenses"]',
+    },
+    list: '[data-testid="list"]'
   }
 };
 

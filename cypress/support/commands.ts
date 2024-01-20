@@ -83,7 +83,7 @@ Cypress.Commands.add('fillForm', (expense: Transaction) => {
 Cypress.Commands.add('validateRecentlyCreatedListItem', (expense: Transaction) => {
   const createdTimeAgo = useRelativeTimeFormat(expense.createdAt);
 
-  cy.get('[data-testid="list"]').children().should('have.length', 1);
+  cy.get(selector.recentlyAdded.list).children().should('have.length', 1);
 
   cy.get(`[data-testid="list-item-icon"]`).children().should('have.length', 1);
   cy.get(`[data-testid="list-item-icon-expense"]`).should(expense.type === TransactionType.Expense ? 'be.visible' : 'not.exist');
