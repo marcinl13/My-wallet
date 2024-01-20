@@ -1,21 +1,9 @@
-import { categoryDictionary } from '../../src/const/categoryDictionary';
-import { TransactionGroup } from '../../src/const/Groups';
-import { TransactionType } from '../../src/const/Variants';
+import { fakeEarning } from '../fixtures/fakeTransactions';
 import { numberToCurrency, selector, visitRoute } from '../support/utils';
 
-const expense = {
-  id: 1,
-  amount: Math.floor(Math.random() * 91) + 15,
-  text: 'New Earning entry',
-  type: TransactionType.Earning,
-  group: TransactionGroup.Food,
-  category: categoryDictionary[TransactionGroup.Food][1],
-  createdAt: new Date()
-};
-
-describe('Test expense creation flow', () => {
+describe('Test earning creation flow', () => {
   beforeEach(() => {
-    cy.clearTransactionsDB();
+    cy.clearTransactions();
   });
 
   it('Can reach form from home page', () => {
@@ -32,17 +20,17 @@ describe('Test expense creation flow', () => {
   it('Can submit form', () => {
     cy.visit(visitRoute.AddEarning);
 
-    cy.fillForm(expense);
+    cy.fillForm(fakeEarning);
   });
 
   it('Transaction should change cash flow ', () => {
     cy.visit(visitRoute.AddEarning);
 
-    cy.fillForm(expense);
+    cy.fillForm(fakeEarning);
 
     cy.visit(visitRoute.Home);
 
-    const incomeAmount = expense.amount;
+    const incomeAmount = fakeEarning.amount;
     const expenseAmount = 0;
     const diffAmount = incomeAmount - expenseAmount;
 
@@ -54,20 +42,23 @@ describe('Test expense creation flow', () => {
   it('Transaction should change recently created list', () => {
     cy.visit(visitRoute.AddEarning);
 
-    cy.fillForm(expense);
+    cy.fillForm(fakeEarning);
 
     cy.visit(visitRoute.Home);
 
-    cy.validateRecentlyCreatedListItem(expense);
+    cy.validateRecentlyCreatedListItem(fakeEarning);
   });
 
   it('Transaction appears on expense group', () => {
     cy.visit(visitRoute.AddEarning);
 
-    cy.fillForm(expense);
+    cy.fillForm(fakeEarning);
 
     cy.visit(visitRoute.Home);
 
-    cy.get(`[data-testid="${expense.group}-item-amount"]`).should('have.text', numberToCurrency(expense.amount));
+    cy.get(`[data-testid="${fakeEarning.group}-item-amount"]`).should(
+      'have.text',
+      numberToCurrency(fakeEarning.amount)
+    );
   });
 });
