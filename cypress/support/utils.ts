@@ -1,8 +1,15 @@
+import { TransactionGroup } from "../../src/const/Groups";
+import { Transaction } from "../../src/const/Transaction";
+
 export function numberToCurrency(amount: number): string {
   return amount.toLocaleString('en-us', {
     style: 'currency',
     currency: 'USD'
   });
+}
+
+export function sumTransactions(transaction: Transaction[], group: TransactionGroup) {
+  return transaction.filter((f) => f.group === group)?.reduce((n, { amount }) => n + amount, 0);
 }
 
 export const selector = {
